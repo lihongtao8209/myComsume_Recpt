@@ -1,0 +1,35 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "test", "test\test.csproj", "{AFA35879-B21F-402F-BE28-CF50BF9A6F2B}"
+	ProjectSection(ProjectDependencies) = postProject
+		{5C6B5056-4D94-4B8B-8A52-556121FA6FDC} = {5C6B5056-4D94-4B8B-8A52-556121FA6FDC}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "mySql", "..\mySql\mySql.csproj", "{5C6B5056-4D94-4B8B-8A52-556121FA6FDC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "grid", "..\..\..\..\o2o\test\grid\grid.csproj", "{E9E8592D-EC7C-43BC-BE78-2C4D96767C5C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{AFA35879-B21F-402F-BE28-CF50BF9A6F2B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AFA35879-B21F-402F-BE28-CF50BF9A6F2B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AFA35879-B21F-402F-BE28-CF50BF9A6F2B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AFA35879-B21F-402F-BE28-CF50BF9A6F2B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5C6B5056-4D94-4B8B-8A52-556121FA6FDC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5C6B5056-4D94-4B8B-8A52-556121FA6FDC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5C6B5056-4D94-4B8B-8A52-556121FA6FDC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5C6B5056-4D94-4B8B-8A52-556121FA6FDC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E9E8592D-EC7C-43BC-BE78-2C4D96767C5C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E9E8592D-EC7C-43BC-BE78-2C4D96767C5C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E9E8592D-EC7C-43BC-BE78-2C4D96767C5C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E9E8592D-EC7C-43BC-BE78-2C4D96767C5C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
