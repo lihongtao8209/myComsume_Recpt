@@ -12,6 +12,7 @@ namespace cameraDriver
     public partial class camerDriver : UserControl
     {
         CameraHelper cameraHelper = new CameraHelper();
+        FileHelper   fileHelper = new FileHelper();
         cVideo video = null;
         public camerDriver()
         {
@@ -23,19 +24,7 @@ namespace cameraDriver
             this.BackColor = Color.White;
         }
 
-        private void camerDriver_Leave(object sender, EventArgs e)
-        {//退出
-            /*
-            try
-            {
-                video.CloseWebcam();
-            }
-            catch (System.Exception ex)
-            {
-                MessageBox.Show(ex.StackTrace + ex.Message);
-            }
-             * */
-        }
+
 
         public void camerDriver_Closed()
         {
@@ -69,9 +58,10 @@ namespace cameraDriver
             get;
             set;
         }
-        public void SaveImage(string ImageDir,string imageName)
+
+        public void SaveImage(string ImageDir, string imageName)
         {//拍照并保存
-            if (ImageDir == "" || ImageDir==null)
+            if (ImageDir == "" || ImageDir == null)
             {
                 MessageBox.Show("请输入" + imageName + "的文件路径!");
             }
@@ -82,26 +72,11 @@ namespace cameraDriver
             }
         }
 
-        private void camerDriver_Enter(object sender, EventArgs e)
-        {
-            //加载
-            /*
-            try
-            {
-                video = new cVideo(this.pictureBox1.Handle, this.pictureBox1.Width, this.pictureBox1.Height);
-                video.StartWebCam();
-            }
-            catch (System.Exception ex)
-            {
-                MessageBox.Show(ex.StackTrace + ex.Message);
-            }
-            */
-        }
 
- 
+
         public void Do(string item_no, bool isRecpt = false)
         {
-            if(isRecpt==false)
+            if (isRecpt == false)
             {
                 cameraHelper.Do(item_no);
             }
@@ -109,13 +84,23 @@ namespace cameraDriver
             {
                 cameraHelper.Do_Recpt(item_no);
             }
-            SaveImage("c:",cameraHelper.FileName);
+            //SaveImage("c:", cameraHelper.FileName);
+            SaveImage();
+        }
+
+        private void SaveImage()
+        {
+            fileHelper.JudgeDirName(cameraHelper.FileName);
+            SaveImage(fileHelper.RepositoryPrePath, fileHelper.DateTimeDir + "\\" + cameraHelper.FileName);
         }
 
 
+        public void Setrepository(string root)
+        {
+            fileHelper.SetrepositoryPath(root);
+            fileHelper.CreateDirs();
+        }
 
 
-
- 
     }
 }

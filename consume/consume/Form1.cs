@@ -26,12 +26,12 @@ namespace consume
         {
             InitializeComponent();
             initRecptComponent();
+            initCameraComponent();
             showRecptComponent();
             issue1.Event_ItemNo += new issue.Del_ItemNo(issue1_Event_ItemNo);
             recpt1.Event_recpt_ItemNo += new recpt.Del_recpt_ItemNo(recpt_Event_ItemNo);
             event_control_close += new control_close(camerDriver1.camerDriver_Closed);
             event_control_show += new control_show(camerDriver1.camerDriver_Open);
-
         }
 
         void initRecptComponent()
@@ -55,6 +55,11 @@ namespace consume
             this.Controls.Add(recpt_list1);
         }
 
+        void initCameraComponent()
+        {
+            camerDriver1.Setrepository("c:\\");
+        }
+
         void showRecptComponent(bool show=false)
         {
             if (show == false)
@@ -68,6 +73,7 @@ namespace consume
                 recpt_list1.Show();
             }
         }
+
 
         void showIssueComponent(bool shwo = false)
         {

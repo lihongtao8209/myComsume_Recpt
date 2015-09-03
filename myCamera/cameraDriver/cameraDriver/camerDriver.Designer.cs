@@ -53,8 +53,6 @@ namespace cameraDriver
             this.Name = "camerDriver";
             this.Size = new System.Drawing.Size(264, 191);
             this.Load += new System.EventHandler(this.camerDriver_Load);
-            this.Enter += new System.EventHandler(this.camerDriver_Enter);
-            this.Leave += new System.EventHandler(this.camerDriver_Leave);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
 
