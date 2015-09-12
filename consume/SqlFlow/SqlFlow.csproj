@@ -40,6 +40,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="flow.cs" />
+    <Compile Include="查询界面\query_issue_record.cs" />
     <Compile Include="流程_SQL\issueHelper.cs" />
     <Compile Include="宏\macro.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

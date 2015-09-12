@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Text;
 using ConnectMySql;
 using System.Collections;
-using myException;
 using System.Windows.Forms;
 namespace SQL_FLOW
 {
@@ -11,13 +10,13 @@ namespace SQL_FLOW
     abstract class TransAction
     {
         //设置SQL语句
-        public string SetSql(string sql,string[] args)
+        public virtual string SetSql(string sql, string[] args)
         {
             this.sql = string.Format(sql, args);
             return this.sql;
         }
         //得到SQL语句
-        public string GetSql()
+        public virtual string GetSql()
         {
             return sql;
         }
@@ -67,17 +66,38 @@ namespace SQL_FLOW
         protected const string user = "root";
         protected const string pwd = "123456";
     }
+    //
+    class TransAction_Read : TransAction
+    {
+        protected Sql_struct m_sql_struct =null;
+        public virtual void init()
+        {
+
+        }
+        public override void Input(List<string[]> parameters)
+        {
+            init();
+            base.Input(parameters[0], m_sql_struct);
+        }
+        public override void OutPut(ref List<string[]> paramers)
+        {
+            //取得结果
+            mySqlSimpleOper = new MySqlSimpleOper(db_name, user, pwd, GetSql());
+            mySqlSimpleOper.MySqlRead(ref paramers);
+        }
+
+    }
     //货名,专框名称,
     class TransAction0 : TransAction
     {
-        public  TransAction0()
+        public TransAction0()
         {
         }
         //输入条码
         public override void Input(List<string[]> parameters)
         {
-           Sql_struct sql_struct=new Sql_struct0();
-           base.Input(parameters[0], sql_struct);
+            Sql_struct sql_struct = new Sql_struct0();
+            base.Input(parameters[0], sql_struct);
         }
         //0 货号 1 类型 2 品名
         public override void OutPut(ref List<string[]> paramers)
@@ -94,7 +114,7 @@ namespace SQL_FLOW
     //读取实时库存
     class TransAction1 : TransAction
     {
-        public  TransAction1()
+        public TransAction1()
         {
 
         }
@@ -117,19 +137,19 @@ namespace SQL_FLOW
     //插入发货表(consume_records) 更新库存 consume_stock
     class TransAction2 : TransAction
     {
-        
+
         public TransAction2()
         {
-            
+
         }
         //插入--0 货号             1 名称     2 数量 3 插入时间 4 专柜名称
         //更新--0 时实库存-发放数量 1 插入时间 2 货号
-        public override void Input(List<string []> paramers)
+        public override void Input(List<string[]> paramers)
         {
             Sql_struct[] sql_struct = new Sql_struct[] { new Sql_struct2(), new Sql_struct3() };
             base.Input(paramers, sql_struct);
         }
-        
+
 
         public override void OutPut(ref List<string[]> parameters)
         {
@@ -139,26 +159,26 @@ namespace SQL_FLOW
                 //
                 Sql_result_struct sql_struct = new Sql_result_struct2();
                 string[] parameter_out = new string[sql_struct.GetParamCount()];
-                for ( i = 0; i < parameter_out.Length; i++)
+                for (i = 0; i < parameter_out.Length; i++)
                 {
                     parameter_out[i] = parameters[i][0];
                 }
                 //取得结果
                 mySqlSimpleOper = new MySqlSimpleOper(db_name, user, pwd);
                 mySqlSimpleOper.MySqlExecuteNoQuery(GetSqls(), ref parameter_out);
-                for ( i = 0; i < parameter_out.Length; i++)
+                for (i = 0; i < parameter_out.Length; i++)
                 {
                     parameters[i][0] = parameter_out[i];
                 }
             }
             catch (System.Exception ex)
             {
-               // MessageBox.Show("失败!" + ex.StackTrace + ex.Message);
-                throw new IAmMySqlException(ex.StackTrace+ex.Message+"执行sql失败" + parameters[i][0]);
+                // MessageBox.Show("失败!" + ex.StackTrace + ex.Message);
+                throw new IAmMySqlException(ex.StackTrace + ex.Message + "执行sql失败" + parameters[i][0]);
             }
         }
 
-     }
+    }
 
     //查询消耗品表(consume_items) 
     class TransAction3 : TransAction0
@@ -251,7 +271,7 @@ namespace SQL_FLOW
                 //取得结果
                 string[] parameter_out = new string[1];
                 mySqlSimpleOper = new MySqlSimpleOper(db_name, user, pwd);
-                mySqlSimpleOper.MySqlInsert(GetSql(),ref parameter_out);
+                mySqlSimpleOper.MySqlInsert(GetSql(), ref parameter_out);
                 for (int i = 0; i < parameter_out.Length; i++)
                 {
                     parameters[i][0] = parameter_out[i];
@@ -273,6 +293,44 @@ namespace SQL_FLOW
         {
             Sql_struct sql_struct = new sql_struct_cameraDriver_recpt_0();
             base.Input(parameters[0], sql_struct);
+        }
+    }
+
+    // 发货查询 consume_items,consume_barcode ,consume_records,consume_stock,consume_records_image
+    class TransAction_Query_issue_record : TransAction_camera0
+    {
+        public override string SetSql(string sql, string[] args)
+        {
+            //this.sql = string.Format(sql, args);
+            this.sql = sql;
+            return this.sql;
+        }
+
+        public override void Input(List<string[]> parameters)
+        {
+            Sql_struct sql_struct = new sql_struct_query_issue_record();
+            base.Input(parameters[0], sql_struct);
+        }
+    }
+    //  收货查询 consume_items,consume_barcode ,consume_recpt_records,consume_stock,consume_recpt_records_image
+
+    class TransAction_Query_recpt_record : TransAction_Query_issue_record
+    {
+        public override void Input(List<string[]> parameters)
+        {
+            Sql_struct sql_struct = new sql_struct_query_recpt_record();
+            base.Input(parameters[0], sql_struct);
+        }
+    }
+
+    //发货查询
+    //输入 品名
+    //输出 "货号","品名","规格","厂编","厂名","发货数量","库存","更新时间"
+    class T_issue_name_query_issue_record : TransAction_Read
+    {
+        public override void init()
+        {
+            m_sql_struct = new issue_name_query_issue_record();
         }
     }
 

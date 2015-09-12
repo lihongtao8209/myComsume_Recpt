@@ -34,13 +34,25 @@
     <Reference Include="mySql">
       <HintPath>..\mySql\bin\Debug\mySql.dll</HintPath>
     </Reference>
+    <Reference Include="SqlFlow">
+      <HintPath>..\SqlFlow\bin\Debug\SqlFlow.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
+    <Reference Include="Tools">
+      <HintPath>..\Tools\bin\Debug\Tools.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="issue_name_itemNo.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="issue_name_itemNo.Designer.cs">
+      <DependentUpon>issue_name_itemNo.cs</DependentUpon>
+    </Compile>
     <Compile Include="检查\check.cs" />
     <Compile Include="工具\controlTool.cs" />
     <Compile Include="issue.cs">
@@ -66,6 +78,9 @@
   <ItemGroup>
     <EmbeddedResource Include="issue.resx">
       <DependentUpon>issue.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="issue_name_itemNo.resx">
+      <DependentUpon>issue_name_itemNo.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="recpt.resx">
       <DependentUpon>recpt.cs</DependentUpon>

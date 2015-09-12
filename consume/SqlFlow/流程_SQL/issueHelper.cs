@@ -6,25 +6,28 @@ using System.Text;
 
 namespace SQL_FLOW
 {
-    class IssueHelper
+    public class IssueHelper
     {
         TransAction[] transAction;
         TransAction[] cameraTransAction;
+        TransAction[] queryTransAction;
         List<string[]> parametersIn = new List<string[]>();
         List<string[]> parametersOut = new List<string[]>();
         string[] parameter_in;
         string[] parameter_out;
         public IssueHelper()
         {
-            transAction = new TransAction[] { new TransAction0(), new TransAction1(), new TransAction2(),new TransAction3(),new TransAction4(),new TransAction5()};
+            //transAction = new TransAction[] { new TransAction0(), new TransAction1(), new TransAction2(),new TransAction3(),new TransAction4(),new TransAction5()};
+            transAction = new TransAction[] { new T_issue_name_query_issue_record(), new TransAction1(), new TransAction2(), new TransAction3(), new TransAction4(), new TransAction5() };
             cameraTransAction = new TransAction[] { new TransAction_camera0(), new TransAction_camera_recpt0(), new TransAction_camera_ins()};
+            queryTransAction = new TransAction[] { new TransAction_Query_issue_record(),new TransAction_Query_recpt_record()};
         }
 
         /// <summary>
         /// 发货 界面
         /// </summary>
         /// 
-
+        /*
         public void Query0(string t_barcode,ref string item_no,ref string item_type,ref string item_name)
         {   //查询 货号、耗材名、类型(用来判断是否为专柜商品)
             //入参 条码
@@ -42,7 +45,38 @@ namespace SQL_FLOW
             item_no = parametersOut[0][0];
             item_type = parametersOut[0][1];
             item_name = parametersOut[0][2];
+        }*/
+        
+        public void Query00(string t_name,ref string item_no,ref string name,ref string spec,ref string sup_no,ref string companyName,ref string issueQty,ref string realTimeStock,ref string work_date)
+        {//"货号","规格","品名","厂名", "厂编"
+            Clear();
+            parameter_in = new string[] { t_name };
+            parametersIn.Add(parameter_in);
+            //加入入参列表中
+            transAction[0].Input(parametersIn);
+            //得到出参列表
+            transAction[0].OutPut(ref parametersOut);
+            item_no = parametersOut[0][0];
+            name = parametersOut[0][1];
+            spec = parametersOut[0][2];
+            sup_no = parametersOut[0][3];
+            companyName = parametersOut[0][4];
+            issueQty = parametersOut[0][5];
+            realTimeStock = parametersOut[0][6];
+            work_date = parametersOut[0][7];
         }
+
+        public void Query0(ref List<string[]> parametersOut)
+        {
+            Clear();
+            parameter_in = new string[] { "null" };
+            parametersIn.Add(parameter_in);
+            //加入入参列表中
+            transAction[0].Input(parametersIn);
+            //得到出参列表
+            transAction[0].OutPut(ref parametersOut);
+        }
+
         public void Query1(string item_no, ref string realtimeStock)
         {
             //查询 实时库存
@@ -228,6 +262,32 @@ namespace SQL_FLOW
             return macro.succeed;
         }
 
+        public void Query_issue_record(ref  List<string[]> result)
+        {
+             Clear();
+            parameter_in = new string[] { "null" };
+            parametersIn.Add(parameter_in);
+            //加入入参列表中
+            queryTransAction[0].Input(parametersIn);
+            //得到出参列表
+            queryTransAction[0].OutPut(ref parametersOut);
+            result = parametersOut;
+        }
+
+        public void Query_recpt_record(ref  List<string[]> result)
+        {
+            Clear();
+            parameter_in = new string[] { "null" };
+            parametersIn.Add(parameter_in);
+            //加入入参列表中
+            queryTransAction[1].Input(parametersIn);
+            //得到出参列表
+            queryTransAction[1].OutPut(ref parametersOut);
+            result = parametersOut;
+        }
+
+    
+        
         private void Clear()
         {
             parametersIn.Clear();

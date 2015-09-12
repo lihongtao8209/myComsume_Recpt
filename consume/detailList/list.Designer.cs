@@ -30,8 +30,8 @@
         {
             this.listView1 = new System.Windows.Forms.ListView();
             this.ch_item_name = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.ch_barcode = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.ch_shoppe_name = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.ch_barcode = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.ch_item_no = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.ch_issue_qty = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.ch_realTimeStock = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -52,7 +52,7 @@
             this.listView1.GridLines = true;
             this.listView1.Location = new System.Drawing.Point(0, 0);
             this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(1000, 410);
+            this.listView1.Size = new System.Drawing.Size(1109, 445);
             this.listView1.TabIndex = 0;
             this.listView1.UseCompatibleStateImageBehavior = false;
             this.listView1.View = System.Windows.Forms.View.Details;
@@ -62,17 +62,17 @@
             this.ch_item_name.Text = "品名";
             this.ch_item_name.Width = 164;
             // 
-            // ch_barcode
-            // 
-            this.ch_barcode.DisplayIndex = 1;
-            this.ch_barcode.Text = "条码";
-            this.ch_barcode.Width = 148;
-            // 
             // ch_shoppe_name
             // 
             this.ch_shoppe_name.DisplayIndex = 2;
             this.ch_shoppe_name.Text = "专柜商品名";
             this.ch_shoppe_name.Width = 135;
+            // 
+            // ch_barcode
+            // 
+            this.ch_barcode.DisplayIndex = 1;
+            this.ch_barcode.Text = "条码";
+            this.ch_barcode.Width = 148;
             // 
             // ch_item_no
             // 
@@ -100,7 +100,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.listView1);
             this.Name = "list";
-            this.Size = new System.Drawing.Size(1000, 410);
+            this.Size = new System.Drawing.Size(1109, 445);
             this.ResumeLayout(false);
 
         }

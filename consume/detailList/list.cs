@@ -12,6 +12,7 @@ namespace detailList
     public partial class list : UserControl
     {
         IssueHelper issueHelper = new IssueHelper();
+        
         public list()
         {
             InitializeComponent();
@@ -36,6 +37,7 @@ namespace detailList
                 MessageBox.Show(ex.Message);
             }
         }
+
         private void AddToList()
         {
 

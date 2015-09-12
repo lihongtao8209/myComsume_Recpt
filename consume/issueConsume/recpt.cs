@@ -60,7 +60,7 @@ namespace recptConsume
                     //显示
                     ShowInfo();
                 }
-                catch (IAmCheckException ex)
+                catch (myException.IAmCheckException ex)
                 {   //清空
                     controlTool.Empty(t_barcode);
                     MessageBox.Show(ex.Message);

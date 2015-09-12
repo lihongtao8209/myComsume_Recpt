@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace myException
+namespace SQL_FLOW
 {
     public class IAmCheckException : System.Exception
     {//声明异常

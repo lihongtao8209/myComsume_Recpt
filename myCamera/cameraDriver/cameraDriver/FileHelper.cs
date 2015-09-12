@@ -33,10 +33,25 @@ namespace cameraDriver
 
         public void CreateDirs()
         {
-            for (int i = 0; i < repository_path.Length;i++ )
+            for (int i = 0; i < repository_path.Length; i++)
             {
                 CreateDirs(repository_path[i]);
             }
+        }
+
+        public void CreateDir(string dirPath)
+        {
+            if (!Directory.Exists(dirPath))
+            {
+                DirectoryInfo r = Directory.CreateDirectory(dirPath);
+                dirPathList.Add(r.FullName);
+            }
+        }
+
+        public string CreateDateTimeDir()
+        {
+            CreateDir(DateTimeDir);
+            return DateTimeDir;
         }
 
         //设置根路径 如 root 为 c:\ 则合成
@@ -52,15 +67,15 @@ namespace cameraDriver
         }
 
         //根据文件名判断目录是 issue目录还是recpt
-        public void  JudgeDirName(string filename)
+        public void JudgeDirName(string filename)
         {
             filename_part = filename.Split('_');
-            for (int i = 0; i < repository_path.Length;i++ )
+            for (int i = 0; i < repository_path.Length; i++)
             {
-                if (repository_path[i].IndexOf(filename_part[0].ToLower())!=-1)
+                if (repository_path[i].IndexOf(filename_part[0].ToLower()) != -1)
                 {
                     RepositoryPrePath = repository_path[i];
-
+                    return;
                 }
             }
         }
@@ -74,8 +89,12 @@ namespace cameraDriver
 
         public string DateTimeDir
         {
-            get;
-            set;
+            get
+            {
+                int len = filename_part[1].Length - 6;
+                return RepositoryPrePath + "\\" + filename_part[1].Substring(0, len);
+            }
+
         }
 
         public void OutPut()

@@ -39,6 +39,9 @@
     <Reference Include="mySql">
       <HintPath>..\..\mySql\bin\Debug\mySql.dll</HintPath>
     </Reference>
+    <Reference Include="SqlFlow">
+      <HintPath>..\..\SqlFlow\bin\Debug\SqlFlow.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Deployment" />
@@ -76,6 +79,12 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\QueryRecords\QueryRecords.csproj">
+      <Project>{7BD24320-33CB-4AC7-A9AD-B201D02028C8}</Project>
+      <Name>QueryRecords</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

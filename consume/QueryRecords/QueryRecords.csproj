@@ -1,0 +1,140 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{7BD24320-33CB-4AC7-A9AD-B201D02028C8}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>QueryRecords</RootNamespace>
+    <AssemblyName>QueryRecords</AssemblyName>
+    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="mySql">
+      <HintPath>..\mySql\bin\Debug\mySql.dll</HintPath>
+    </Reference>
+    <Reference Include="SqlFlow">
+      <HintPath>..\SqlFlow\bin\Debug\SqlFlow.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Tools">
+      <HintPath>..\Tools\bin\Debug\Tools.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Daytime_query.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Daytime_query.Designer.cs">
+      <DependentUpon>Daytime_query.cs</DependentUpon>
+    </Compile>
+    <Compile Include="image.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="image.Designer.cs">
+      <DependentUpon>image.cs</DependentUpon>
+    </Compile>
+    <Compile Include="issue_query.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="issue_query.Designer.cs">
+      <DependentUpon>issue_query.cs</DependentUpon>
+    </Compile>
+    <Compile Include="issue_list_query.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="issue_list_query.Designer.cs">
+      <DependentUpon>issue_list_query.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MainPanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="MainPanel.Designer.cs">
+      <DependentUpon>MainPanel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="recpt_query.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="recpt_query.Designer.cs">
+      <DependentUpon>recpt_query.cs</DependentUpon>
+    </Compile>
+    <Compile Include="recpt_list_query.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="recpt_list_query.Designer.cs">
+      <DependentUpon>recpt_list_query.cs</DependentUpon>
+    </Compile>
+    <Compile Include="异常\myException.cs" />
+    <Service Include="{94E38DFF-614B-4cbd-B67C-F211BB35CE8B}" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Daytime_query.resx">
+      <DependentUpon>Daytime_query.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="image.resx">
+      <DependentUpon>image.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="issue_query.resx">
+      <DependentUpon>issue_query.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="issue_list_query.resx">
+      <DependentUpon>issue_list_query.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MainPanel.resx">
+      <DependentUpon>MainPanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="recpt_query.resx">
+      <DependentUpon>recpt_query.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="recpt_list_query.resx">
+      <DependentUpon>recpt_list_query.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\myCamera\cameraDriver\cameraDriver\cameraDriver.csproj">
+      <Project>{6F3EDFB0-27EE-476A-BE31-B23BA259AEA1}</Project>
+      <Name>cameraDriver</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\detailList\detailList.csproj">
+      <Project>{8CA4FC8A-84BF-4304-B1B7-4D4B60DBBE2D}</Project>
+      <Name>detailList</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\issueConsume\issue_recpt_Consume.csproj">
+      <Project>{1381E8EC-EECC-4694-BDF3-E3DEA8754743}</Project>
+      <Name>issue_recpt_Consume</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

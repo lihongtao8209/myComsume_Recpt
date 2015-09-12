@@ -69,4 +69,12 @@ namespace Macro
         public const string shoppeName= "专柜商品名称";
         public const string itemNo = "货号";
     }
+
+    public  struct FlowFlag
+    {
+        public const int query_issue_record = 4;
+        public const int query_recpt_record = 5;
+        public int Get_query_issue_record() { return query_issue_record; }
+        public int Get_query_recpt_record() { return query_recpt_record; }
+    }
 }

@@ -36,6 +36,10 @@
     <Reference Include="mySql">
       <HintPath>..\mySql\bin\Debug\mySql.dll</HintPath>
     </Reference>
+    <Reference Include="SqlFlow, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\SqlFlow\bin\Debug\SqlFlow.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Deployment" />
@@ -86,6 +90,10 @@
     <ProjectReference Include="..\issueConsume\issue_recpt_Consume.csproj">
       <Project>{1381E8EC-EECC-4694-BDF3-E3DEA8754743}</Project>
       <Name>issue_recpt_Consume</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\QueryRecords\QueryRecords.csproj">
+      <Project>{7BD24320-33CB-4AC7-A9AD-B201D02028C8}</Project>
+      <Name>QueryRecords</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

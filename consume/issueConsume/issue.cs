@@ -36,7 +36,7 @@ namespace issueConsume
         DoCheck doCheck = new DoCheck();
         //
         ControlTool controlTool = new ControlTool();
-        string m_errorMsg;
+
 
         public string Item_no
         {

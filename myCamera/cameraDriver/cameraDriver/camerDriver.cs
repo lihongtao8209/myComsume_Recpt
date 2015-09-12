@@ -12,7 +12,7 @@ namespace cameraDriver
     public partial class camerDriver : UserControl
     {
         CameraHelper cameraHelper = new CameraHelper();
-        FileHelper   fileHelper = new FileHelper();
+        FileHelper fileHelper = new FileHelper();
         cVideo video = null;
         public camerDriver()
         {
@@ -91,7 +91,7 @@ namespace cameraDriver
         private void SaveImage()
         {
             fileHelper.JudgeDirName(cameraHelper.FileName);
-            SaveImage(fileHelper.RepositoryPrePath, fileHelper.DateTimeDir + "\\" + cameraHelper.FileName);
+            SaveImage(fileHelper.CreateDateTimeDir(),cameraHelper.FileName);
         }
 
 

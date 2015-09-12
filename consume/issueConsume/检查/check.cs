@@ -93,7 +93,7 @@ namespace Check
             bool bresult = Regex.IsMatch(checkedStr, pattern);
             if (bresult == false)
             {
-                throw new IAmCheckException(m_errorMsg);
+                throw new myException.IAmCheckException(m_errorMsg);
             }
         }
         //

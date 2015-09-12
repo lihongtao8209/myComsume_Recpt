@@ -9,6 +9,7 @@ namespace ConnectMySql
 {
     public class MySqlSimpleOper
     {
+        static string serverIp = "";
         string sqlString = "";
         string []sqlStringArray;
         MySQLConnection conn = null;
@@ -17,18 +18,24 @@ namespace ConnectMySql
         MySQLConnectionString connectionString = null;
         public MySqlSimpleOper(string dataSource, string user, string password, string sql = "")
         {
-            connectionString = new MySQLConnectionString(dataSource, user, password);
+            connectionString = new MySQLConnectionString(serverIp,dataSource, user, password);
+            sqlString = sql;
+        }
+
+        public MySqlSimpleOper(string serverIp,string dataSource, string user, string password, string sql = "")
+        {
+            connectionString = new MySQLConnectionString(serverIp,dataSource, user, password);
             sqlString = sql;
         }
 
         public MySqlSimpleOper(string dataSource, string user, string password)
         {
-            connectionString = new MySQLConnectionString(dataSource, user, password);
+            connectionString = new MySQLConnectionString(serverIp,dataSource, user, password);
         }
 
         public MySqlSimpleOper(string dataSource, string user, string password,string [] sqlArray)
         {
-            connectionString = new MySQLConnectionString(dataSource, user, password);
+            connectionString = new MySQLConnectionString(serverIp,dataSource, user, password);
             sqlStringArray = sqlArray;
         }
 
@@ -55,6 +62,11 @@ namespace ConnectMySql
                 return sqlString;
             }
          }
+
+        static public void SetServerIp(string ip)
+        {
+            serverIp = ip;
+        }
 
         //连接
         private void OpenConnection()
