@@ -24,4 +24,9 @@ namespace Tools
         public IAmIssueQueryException(string msg) : base(msg) { }
         public IAmIssueQueryException() { }
     }
+    public class IAmctrl_name_itemNo : System.Exception
+    {
+        public IAmctrl_name_itemNo(string msg) : base(msg) { }
+        public IAmctrl_name_itemNo() { }
+    }
 }

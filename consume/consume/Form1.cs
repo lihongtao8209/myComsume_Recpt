@@ -205,7 +205,7 @@ namespace consume
             SQL_FLOW.IssueHelper issueHelper= new SQL_FLOW.IssueHelper();
             List<string[]> result=new List<string[]>();
             issueHelper.Query0(ref result);
-            issue_name_itemNo1.consume_items_supplier_result = result;
+            issue_name_itemNo1.SetResult(ref result);
         }
     }
 }

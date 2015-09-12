@@ -35,10 +35,12 @@ namespace issueConsume
         Tools.DoCheck doCheck = new Tools.DoCheck();
         //
         ControlTool controlTool = new ControlTool();
+        //
 
         public issue_name_itemNo()
         {
             InitializeComponent();
+            ctrl_name_itemNo1.Event_ctrl_name_itemNo_KeyDown += new ctrl_name_itemNo.Del_ctrl_name_itemNo_KeyDown(ctrl_name_itemNo_KeyDown);
         }
 
         public string Item_no
@@ -49,76 +51,25 @@ namespace issueConsume
             }
         }
 
-        public List<string[]> consume_items_supplier_result
+        public void SetResult(ref List<string[]> result)
         {
-            get;
-            set;
+            ctrl_name_itemNo1.consume_items_supplier_result = result;
         }
-
-        private void comb_name_itemNo_KeyDown(object sender, KeyEventArgs e)
+  
+        //按下回车键
+        public void ctrl_name_itemNo_KeyDown(object sender, KeyEventArgs e)
         {
-            //输入品名或者货号 
-            if (e.KeyCode == Keys.Enter)
+            try
             {
-
+                 
             }
-            else
+            catch (System.Exception ex)
             {
-
-
+            	
             }
         }
+      
 
-        private void comb_name_itemNo_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            /*
-            Debug.WriteLine(e.KeyChar);
-            //1.如果从开始是数字
-            doCheck.toCheck(Tools.CheckKey.StrTypeCheck, Tools.StrTypeCheck_Value.onlyDigit, e.KeyChar.ToString());
-            if (doCheck.doCheck_Result.IsStrTypeCheck_Result==true)
-            {
-                return;
-            }
-            //2.如果从开始是字母
-            doCheck.toCheck(Tools.CheckKey.StrTypeCheck, Tools.StrTypeCheck_Value.onlyAlphabet, e.KeyChar.ToString());
-            if (doCheck.doCheck_Result.IsStrTypeCheck_Result==true)
-            {
-                return;
-            }
-            doCheck.toCheck(Tools.CheckKey.StrTypeCheck,Tools.StrTypeCheck_Value.onlyChineseIdeograph,e.KeyChar.ToString());
-            //3.如果从开始是汉字
-            if (doCheck.doCheck_Result.IsStrTypeCheck_Result==true)
-            {
-                return;
-            }
-            */
-        }
-
-        private void comb_name_itemNo_TextChanged(object sender, EventArgs e)
-        {
-          //  comb_name_itemNo.DroppedDown = true;
-          //  comb_name_itemNo.Items.Clear();
-            RemoveAll();
-         //   doCheck.toCheck(Tools.CheckKey.StrTypeCheck, Tools.StrTypeCheck_Value.onlyDigit, comb_name_itemNo.Text.ToString());
-          //  if (doCheck.doCheck_Result.IsStrTypeCheck_Result == true)
-            {
-                for (int i = 0; i < consume_items_supplier_result.Count;i++ )
-                {
-                    if (consume_items_supplier_result[i][0].Contains(comb_name_itemNo.Text))
-                    {
-                        comb_name_itemNo.Items.Add(consume_items_supplier_result[i][0]);
-                      
-                    }
-                }
-            }
-     //       comb_name_itemNo.DroppedDown = false;
-        }
-        private void RemoveAll()
-        {
-            for (int i = 0; i < comb_name_itemNo.Items.Count;i++ )
-            {
-                comb_name_itemNo.Items.RemoveAt(i);
-            }
-        }
+     
     }
 }

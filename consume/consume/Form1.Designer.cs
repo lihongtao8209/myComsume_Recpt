@@ -120,7 +120,6 @@
             // 
             // issue_name_itemNo1
             // 
-            this.issue_name_itemNo1.consume_items_supplier_result = null;
             this.issue_name_itemNo1.Location = new System.Drawing.Point(17, 28);
             this.issue_name_itemNo1.Name = "issue_name_itemNo1";
             this.issue_name_itemNo1.Size = new System.Drawing.Size(606, 288);

@@ -47,6 +47,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ctrl_name_itemNo.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ctrl_name_itemNo.Designer.cs">
+      <DependentUpon>ctrl_name_itemNo.cs</DependentUpon>
+    </Compile>
     <Compile Include="issue_name_itemNo.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -76,6 +82,9 @@
     <Service Include="{94E38DFF-614B-4cbd-B67C-F211BB35CE8B}" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="ctrl_name_itemNo.resx">
+      <DependentUpon>ctrl_name_itemNo.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="issue.resx">
       <DependentUpon>issue.cs</DependentUpon>
     </EmbeddedResource>

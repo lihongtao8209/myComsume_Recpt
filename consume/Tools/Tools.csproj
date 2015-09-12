@@ -36,6 +36,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="check.cs" />
+    <Compile Include="ChineseSpell.cs" />
     <Compile Include="FileHelper.cs" />
     <Compile Include="macro.cs" />
     <Compile Include="myException.cs" />

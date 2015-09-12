@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Tools
 {
-    struct macro
+    public struct macro
     {
         public const string nullValue = "null";
         public const string isShoppeGood = "1";
@@ -12,6 +12,8 @@ namespace Tools
         public const string affected0Row = "0";
         public const int succeed=1;
         public const int failed = 0;
+        public const int isInputItemNo = 0;
+        public const int isInputItemName = 1;
     }
 
     public struct CheckKey
@@ -81,8 +83,9 @@ namespace Tools
         public const int onlyChineseIdeograph = 2;
     }
 
-    struct CheckStr_Vlaue
+    public struct CheckStr_Vlaue
     {
+        public const string inputData = "输入的数据";
         public const string realTimeStock="实时库存";
         public const string shoppeName= "专柜商品名称";
         public const string itemNo = "货号";
