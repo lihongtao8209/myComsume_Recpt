@@ -69,17 +69,6 @@ namespace SqlFlow
         }
         private string[] DeleteDateTimeChineseIdeograph(string work_date)
         {
-            /*
-            string format_work_date="";
-            Regex regex = null;
-            string pattern = @"[0-9//:\s]";
-            regex = new Regex(pattern);
-            Match m = regex.Match(work_date);
-            while (m.Success)
-            {
-                format_work_date+= m.Groups[0].Value;
-                m = m.NextMatch();
-            }*/
             //
             string [] format_work_date=new string [2];
             string format_work_date1 = "";

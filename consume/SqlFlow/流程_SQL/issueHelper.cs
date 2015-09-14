@@ -11,6 +11,7 @@ namespace SQL_FLOW
         TransAction[] transAction;
         TransAction[] cameraTransAction;
         TransAction[] queryTransAction;
+        TransAction[] listViewTransAction;
         List<string[]> parametersIn = new List<string[]>();
         List<string[]> parametersOut = new List<string[]>();
         string[] parameter_in;
@@ -19,6 +20,7 @@ namespace SQL_FLOW
         {
             //transAction = new TransAction[] { new TransAction0(), new TransAction1(), new TransAction2(),new TransAction3(),new TransAction4(),new TransAction5()};
             transAction = new TransAction[] { new T_issue_name_query_issue_record(), new TransAction1(), new TransAction2(), new TransAction3(), new TransAction4(), new TransAction5() };
+            listViewTransAction = new TransAction[]{new T_issue_list_query_issue_record()};
             cameraTransAction = new TransAction[] { new TransAction_camera0(), new TransAction_camera_recpt0(), new TransAction_camera_ins()};
             queryTransAction = new TransAction[] { new TransAction_Query_issue_record(),new TransAction_Query_recpt_record()};
         }
@@ -67,7 +69,7 @@ namespace SQL_FLOW
         }
 
         public void Query0(ref List<string[]> parametersOut)
-        {
+        { 
             Clear();
             parameter_in = new string[] { "null" };
             parametersIn.Add(parameter_in);
@@ -75,6 +77,17 @@ namespace SQL_FLOW
             transAction[0].Input(parametersIn);
             //得到出参列表
             transAction[0].OutPut(ref parametersOut);
+        }
+
+        public void Issue_ListView_Query(string item_no, ref List<string[]> parametersOut)
+        {
+            Clear();
+            parameter_in = new string[] { item_no };
+            parametersIn.Add(parameter_in);
+            //加入入参列表中
+            listViewTransAction[0].Input(parametersIn);
+            //得到出参列表
+            listViewTransAction[0].OutPut(ref parametersOut);
         }
 
         public void Query1(string item_no, ref string realtimeStock)

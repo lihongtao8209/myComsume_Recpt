@@ -78,7 +78,7 @@ namespace SQL_FLOW
             outName = new string[] { "insert" };
         }
     }
-   
+
     class Sql_struct6 : Sql_struct
     {
         public Sql_struct6()
@@ -113,7 +113,7 @@ namespace SQL_FLOW
         public sql_struct_cameraDriver_ins()
         {
             sql = "insert into {0} (item_no,fileName,work_date) values ({1},\"{2}\",\"{3}\")";
-            name = new string[] { "插入的表名","货号", "文件名", "插入时间" };
+            name = new string[] { "插入的表名", "货号", "文件名", "插入时间" };
             outName = new string[] { "insert" };
         }
     }
@@ -146,15 +146,15 @@ namespace SQL_FLOW
 				 order by c.record_no desc) as f
                  left join consume_records_image e on f.WORK_DATE=e.WORK_DATE";
             name = new string[] { "null" };
-            outName = new string[] { "品名", "专柜商品名称", "条码", "货号", "发货量", "库存", "更新时间","图像文件名" };
+            outName = new string[] { "品名", "专柜商品名称", "条码", "货号", "发货量", "库存", "更新时间", "图像文件名" };
         }
     }
 
     class sql_struct_query_recpt_record : Sql_struct0
-      {
-          public sql_struct_query_recpt_record()
-          {
-               sql = @"select f.*,e.fileName from
+    {
+        public sql_struct_query_recpt_record()
+        {
+            sql = @"select f.*,e.fileName from
 	            (select  c.name,
 				 b.BAR_CODE,
                  b.item_no,
@@ -168,53 +168,77 @@ namespace SQL_FLOW
 				 order by c.record_no desc) as f
                  left join consume_recpt_records_image e on f.WORK_DATE=e.WORK_DATE";
             name = new string[] { "null" };
-            outName = new string[] { "品名", "条码", "货号", "收货量", "库存", "更新时间","图像文件名" };
-          }
-      }
+            outName = new string[] { "品名", "条码", "货号", "收货量", "库存", "更新时间", "图像文件名" };
+        }
+    }
 
     class issue_name_query_issue_record : Sql_struct0
-      {
-          public issue_name_query_issue_record()
-          {
-              sql = @"select a.item_no,a.name,a.spec,a.company_name ,a.sup_no from v_consume_items_supplier as a";
-              name = new string[] { "null" };
-              outName = new string[] { "货号", "品名", "规格", "厂名", "厂编" };
-          }
-      }
+    {
+        public issue_name_query_issue_record()
+        {
+            sql = @"select a.item_no,a.name,a.spec,a.company_name ,a.sup_no from v_consume_items_supplier as a";
+            name = new string[] { "null" };
+            outName = new string[] { "货号", "品名", "规格", "厂名", "厂编" };
+        }
     }
-    //////////////////////////////////////////////////////////////////////////
+    class issue_list_query_issue_record : Sql_struct0
+    {
+        public issue_list_query_issue_record()
+        {
+            sql = @"select b.*,
+                           aa.QTY,
+                           c.RT_STOCK,
+                           aa.WORK_DATE
+                    from
+                    (select a.qty,
+                           a.work_date,
+	                       a.item_no 
+                     from  consume_records a  
+                     order by a.record_no desc LIMIT 0,1) aa,
+	                    v_consume_items_supplier b,
+                        consume_stock c
+                    where aa.item_no =b.item_no
+                       and aa.item_no=c.item_no
+                       and aa.item_no={0}";
+            name = new string[] { "null" };
+            outName = new string[] { "货号", "品名", "规格", "厂名", "厂编","当前发货量","当前库存","更新时间" };
+        }
+    }
+}
 
-    class Sql_result_struct
-    {
-        protected string[] name;
-        public int GetParamCount()
-        {
-            return name.Length;
-        }
-    }
+//////////////////////////////////////////////////////////////////////////
 
-    class Sql_result_struct0 : Sql_result_struct
+class Sql_result_struct
+{
+    protected string[] name;
+    public int GetParamCount()
     {
-        public Sql_result_struct0()
-        {
-            name = new string[] { "货号", "类型", "品名" };
-        }
+        return name.Length;
     }
-    class Sql_result_struct1 : Sql_result_struct
-    {
-        public Sql_result_struct1()
-        {
-            name = new string[] { "实时库存" };
-        }
-    }
-    class Sql_result_struct2 : Sql_result_struct
-    {
-        public Sql_result_struct2()
-        {
-            name = new string[] { "insert", "update" };
-        }
-    }
+}
 
-    //////////////////////////////////////////////////////////////////////////
+class Sql_result_struct0 : Sql_result_struct
+{
+    public Sql_result_struct0()
+    {
+        name = new string[] { "货号", "类型", "品名" };
+    }
+}
+class Sql_result_struct1 : Sql_result_struct
+{
+    public Sql_result_struct1()
+    {
+        name = new string[] { "实时库存" };
+    }
+}
+class Sql_result_struct2 : Sql_result_struct
+{
+    public Sql_result_struct2()
+    {
+        name = new string[] { "insert", "update" };
+    }
+}
+
+//////////////////////////////////////////////////////////////////////////
 
 

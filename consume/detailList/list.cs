@@ -11,24 +11,25 @@ namespace detailList
 {
     public partial class list : UserControl
     {
-        IssueHelper issueHelper = new IssueHelper();
+        //
+        SQL_FLOW.IssueHelper issueHelper = new SQL_FLOW.IssueHelper();
         
         public list()
         {
             InitializeComponent();
+
         }
         public void Add(string item_no)
         {
             try
             {
-                string item_name = "";
-                string shoppe_name = "";
-                string barcode = "";
-                string realTimeStock = "";
-                string rt_stock = "";
-                string work_date = "";
-                issueHelper.Query0(item_no, ref item_name, ref shoppe_name, ref barcode, ref realTimeStock, ref rt_stock, ref work_date);
-                ListViewItem item = new ListViewItem(new string[] { item_name, shoppe_name, barcode, item_no.ToString(), realTimeStock, rt_stock, work_date });
+                List<string[]> result=new List<string[]>();
+                issueHelper.Issue_ListView_Query(item_no, ref result);
+                if (result == null || result.Count == 0 || result[0] == null)
+                {
+                    MessageBox.Show(item_no + "没有查到数据,无法添加！");
+                }
+                ListViewItem item = new ListViewItem( result[0]);
                 listView1.Items.Add(item);
                 item.EnsureVisible();
             }

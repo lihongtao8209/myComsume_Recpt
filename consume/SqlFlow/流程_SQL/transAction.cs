@@ -326,7 +326,7 @@ namespace SQL_FLOW
 
     //发货查询
     //输入 品名
-    //输出 "货号","品名","规格","厂编","厂名","发货数量","库存","更新时间"
+    //输出 "货号","品名","规格","厂编","厂名"
     class T_issue_name_query_issue_record : TransAction_Read
     {
         public override void init()
@@ -334,5 +334,14 @@ namespace SQL_FLOW
             m_sql_struct = new issue_name_query_issue_record();
         }
     }
-
+    //发货查询记录
+    //输入品名
+    //输出 "货号","品名","规格","厂编","厂名","发货数量","库存","更新时间"
+    class T_issue_list_query_issue_record : TransAction_Read
+    {
+        public override void init()
+        {
+            m_sql_struct = new issue_list_query_issue_record();
+        }
+    }
 }
