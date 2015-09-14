@@ -132,6 +132,7 @@ namespace SQL_FLOW
             //取得结果
             mySqlSimpleOper = new MySqlSimpleOper(db_name, user, pwd, GetSql());
             mySqlSimpleOper.MySqlRead(ref parameters);
+            
         }
     }
     //插入发货表(consume_records) 更新库存 consume_stock

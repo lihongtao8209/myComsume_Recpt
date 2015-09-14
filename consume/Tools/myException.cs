@@ -8,7 +8,7 @@ namespace Tools
     {//声明异常
         public IAmCheckException(string msg) : base(msg) { }
         public IAmCheckException() { }
-    }
+    }            
     public class IAmMySqlException : System.Exception
     {//声明异常
         public IAmMySqlException(string msg) : base(msg) { }

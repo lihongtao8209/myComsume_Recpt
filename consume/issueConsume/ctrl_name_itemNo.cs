@@ -15,13 +15,14 @@ namespace issueConsume
         public delegate void Del_ctrl_name_itemNo_KeyDown(object sender, KeyEventArgs e);
         public event Del_ctrl_name_itemNo_KeyDown Event_ctrl_name_itemNo_KeyDown;
         Tools.DoCheck doCheck = new Tools.DoCheck();
+        bool notCheck = false;
         //判断输入的是货号,还是品名
         public int inPutType
         {
             get;
             set;
         }
-        public string Info
+        public string inPutData
         {
             get
             {
@@ -46,54 +47,56 @@ namespace issueConsume
                 return;
             lb_result.Items.Clear();
             //1.如果是数字
-            doCheck.toCheck(Tools.CheckKey.StrTypeCheck, Tools.StrTypeCheck_Value.onlyDigit, t_name_itemNo.Text);
-            if (doCheck.doCheck_Result.IsStrTypeCheck_Result == true)
+            if (notCheck == false)
             {
-                inPutType = Tools.macro.isInputItemNo;
-                for (int i = 0; i < consume_items_supplier_result.Count; i++)
+                doCheck.toCheck(Tools.CheckKey.StrTypeCheck, Tools.StrTypeCheck_Value.onlyDigit, t_name_itemNo.Text);
+                if (doCheck.doCheck_Result.IsStrTypeCheck_Result == true)
                 {
-                    if (consume_items_supplier_result[i][1].StartsWith(t_name_itemNo.Text))
+                    inPutType = Tools.macro.isInputItemNo;
+                    for (int i = 0; i < consume_items_supplier_result.Count; i++)
                     {
-                        this.lb_result.Items.Add(consume_items_supplier_result[i][1]);
+                        if (consume_items_supplier_result[i][0].StartsWith(t_name_itemNo.Text))
+                        {
+                            this.lb_result.Items.Add(consume_items_supplier_result[i][1]);
+                        }
                     }
-                }
-               
-            }
-            //2.如果从开始是字母
-            doCheck.toCheck(Tools.CheckKey.StrTypeCheck, Tools.StrTypeCheck_Value.onlyAlphabet, t_name_itemNo.Text);
-            if (doCheck.doCheck_Result.IsStrTypeCheck_Result == true)
-            {
-                inPutType = Tools.macro.isInputItemName;
-                for (int i = 0; i < consume_items_supplier_result.Count; i++)
-                {
-                    //获得道路名称各汉字拼音首字母缩写
-                    string strName = (Tools.ChineseSpell.GetChineseSpell(consume_items_supplier_result[i][1])).ToLower();
-                    string strtxtName = Tools.ChineseSpell.GetChineseSpell(t_name_itemNo.Text.ToLower()).ToLower();
-                    //根据拼音进行匹配（利用Contain和Substring函数进行判定）            
-                    if (strName.Contains(strtxtName))
-                    {
-                        this.lb_result.Items.Add(consume_items_supplier_result[i][1]);
-                    }
-                }
-            }
-            doCheck.toCheck(Tools.CheckKey.StrTypeCheck, Tools.StrTypeCheck_Value.onlyChineseIdeograph, t_name_itemNo.Text);
-            //3.如果从开始是汉字
-            if (doCheck.doCheck_Result.IsStrTypeCheck_Result == true)
-            {
-                inPutType = Tools.macro.isInputItemName;
-                for (int i = 0; i < consume_items_supplier_result.Count; i++)
-                {
-                    if (consume_items_supplier_result[i][1].Contains(t_name_itemNo.Text))
-                    {
-                        this.lb_result.Items.Add(consume_items_supplier_result[i][1]);
-                    }
-                }
-            }
 
+                }
+                //2.如果从开始是字母
+                doCheck.toCheck(Tools.CheckKey.StrTypeCheck, Tools.StrTypeCheck_Value.onlyAlphabet, t_name_itemNo.Text);
+                if (doCheck.doCheck_Result.IsStrTypeCheck_Result == true)
+                {
+                    inPutType = Tools.macro.isInputItemNo;
+                    for (int i = 0; i < consume_items_supplier_result.Count; i++)
+                    {
+                        //获得道路名称各汉字拼音首字母缩写
+                        string strName = (Tools.ChineseSpell.GetChineseSpell(consume_items_supplier_result[i][1])).ToLower();
+                        string strtxtName = Tools.ChineseSpell.GetChineseSpell(t_name_itemNo.Text.ToLower()).ToLower();
+                        //根据拼音进行匹配（利用Contain和Substring函数进行判定）            
+                        if (strName.Contains(strtxtName))
+                        {
+                            this.lb_result.Items.Add(consume_items_supplier_result[i][1]);
+                        }
+                    }
+                }
+                doCheck.toCheck(Tools.CheckKey.StrTypeCheck, Tools.StrTypeCheck_Value.onlyChineseIdeograph, t_name_itemNo.Text);
+                //3.如果从开始是汉字
+                if (doCheck.doCheck_Result.IsStrTypeCheck_Result == true)
+                {
+                    inPutType = Tools.macro.isInputItemName;
+                    for (int i = 0; i < consume_items_supplier_result.Count; i++)
+                    {
+                        if (consume_items_supplier_result[i][1].Contains(t_name_itemNo.Text))
+                        {
+                            this.lb_result.Items.Add(consume_items_supplier_result[i][1]);
+                        }
+                    }
+                }
+            }
             if (this.lb_result.Items.Count == 0)
             {
                 this.Height = this.t_name_itemNo.Height;
-                throw new IAmctrl_name_itemNo(t_name_itemNo.Text+" 输入的内容不正确");
+                //throw new IAmctrl_name_itemNo(t_name_itemNo.Text + " 输入的内容不正确");
             }
             else
             {
@@ -104,7 +107,7 @@ namespace issueConsume
 
         private void ctrl_name_itemNo_Load(object sender, EventArgs e)
         {
-           
+
         }
 
         private void lb_result_MouseClick(object sender, MouseEventArgs e)
@@ -113,17 +116,24 @@ namespace issueConsume
             lb_result.SelectedIndex = index;
             if (lb_result.SelectedIndex != -1)
             {
-                t_name_itemNo.Text=lb_result.SelectedItem.ToString();
+                t_name_itemNo.Text = lb_result.SelectedItem.ToString();
                 this.Height = this.t_name_itemNo.Height;
+                notCheck = true;
             }
         }
 
         private void t_name_itemNo_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode==Keys.Enter)
+            if (e.KeyCode == Keys.Enter)
             {
                 doCheck.toCheck(Tools.CheckKey.IsNullCheckStr, Tools.CheckStr_Vlaue.inputData, t_name_itemNo.Text);
                 Event_ctrl_name_itemNo_KeyDown(sender, e);
+                notCheck = false;
+            }
+
+            if (e.KeyCode == Keys.Back)
+            {
+                notCheck = false;
             }
         }
 

@@ -36,7 +36,7 @@
             this.l_itemNo_name = new System.Windows.Forms.Label();
             this.l_name_itemNo = new System.Windows.Forms.Label();
             this.l_spc = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.t_spc = new System.Windows.Forms.TextBox();
             this.ctrl_name_itemNo1 = new issueConsume.ctrl_name_itemNo();
             this.SuspendLayout();
             // 
@@ -49,6 +49,7 @@
             this.t_issueItemQty.ReadOnly = true;
             this.t_issueItemQty.Size = new System.Drawing.Size(176, 30);
             this.t_issueItemQty.TabIndex = 17;
+            this.t_issueItemQty.KeyDown += new System.Windows.Forms.KeyEventHandler(this.t_issueItemQty_KeyDown);
             // 
             // l_issueItemQty
             // 
@@ -125,19 +126,20 @@
             this.l_spc.TabIndex = 18;
             this.l_spc.Text = "规格";
             // 
-            // textBox1
+            // t_spc
             // 
-            this.textBox1.Font = new System.Drawing.Font("SimSun", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.textBox1.Location = new System.Drawing.Point(15, 134);
-            this.textBox1.Margin = new System.Windows.Forms.Padding(2);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.ReadOnly = true;
-            this.textBox1.Size = new System.Drawing.Size(422, 30);
-            this.textBox1.TabIndex = 19;
+            this.t_spc.Font = new System.Drawing.Font("SimSun", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.t_spc.Location = new System.Drawing.Point(15, 134);
+            this.t_spc.Margin = new System.Windows.Forms.Padding(2);
+            this.t_spc.Name = "t_spc";
+            this.t_spc.ReadOnly = true;
+            this.t_spc.Size = new System.Drawing.Size(422, 30);
+            this.t_spc.TabIndex = 19;
             // 
             // ctrl_name_itemNo1
             // 
             this.ctrl_name_itemNo1.consume_items_supplier_result = null;
+            this.ctrl_name_itemNo1.inPutType = 0;
             this.ctrl_name_itemNo1.Location = new System.Drawing.Point(15, 25);
             this.ctrl_name_itemNo1.Name = "ctrl_name_itemNo1";
             this.ctrl_name_itemNo1.Size = new System.Drawing.Size(425, 30);
@@ -148,7 +150,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.ctrl_name_itemNo1);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.t_spc);
             this.Controls.Add(this.l_spc);
             this.Controls.Add(this.t_issueItemQty);
             this.Controls.Add(this.l_issueItemQty);
@@ -175,7 +177,7 @@
         private System.Windows.Forms.Label l_itemNo_name;
         private System.Windows.Forms.Label l_name_itemNo;
         private System.Windows.Forms.Label l_spc;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox t_spc;
         private ctrl_name_itemNo ctrl_name_itemNo1;
     }
 }

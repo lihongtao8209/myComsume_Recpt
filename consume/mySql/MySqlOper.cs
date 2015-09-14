@@ -221,6 +221,10 @@ namespace ConnectMySql
             {
                 throw new IAmMySqlException(ex.StackTrace + ":" + ex.Message + " 数据库串:" + connectionString.AsString+ " SQL语句:" + sqlString);
             }
+            if (result.Count == 0)
+            {
+                throw new IAmMySqlException("没有在数据库中查到数据.数据库串:" + connectionString.AsString + " SQL语句:" + sqlString);
+            }
         }
         //更新
         public void MySqlUpdate()
