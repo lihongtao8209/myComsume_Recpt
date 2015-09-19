@@ -136,6 +136,13 @@ namespace QueryRecords
             }
         }
 
+        public void SetResult(ref List<string[]> result)
+        {
+
+            issue1.SetResult(ref result);
+            recpt1.SetResult(ref result);
+        }
+
 
     }
 }

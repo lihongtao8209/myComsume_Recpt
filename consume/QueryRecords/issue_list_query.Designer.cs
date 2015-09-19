@@ -30,10 +30,12 @@
         {
             this.listView1 = new System.Windows.Forms.ListView();
             this.ch_item_name = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.ch_shoppe_name = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.ch_barcode = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.ch_item_no = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.ch_issue_qty = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.ch_spec = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.ch_companyName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.ch_supNo = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+
             this.ch_realTimeStock = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.work_date = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.ch_imageName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -43,9 +45,10 @@
             // 
             this.listView1.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.ch_item_name,
-            this.ch_shoppe_name,
-            this.ch_barcode,
             this.ch_item_no,
+            this.ch_spec,
+            this.ch_companyName,
+            this.ch_supNo,
             this.ch_issue_qty,
             this.ch_realTimeStock,
             this.work_date,
@@ -66,22 +69,25 @@
             this.ch_item_name.Text = "品名";
             this.ch_item_name.Width = 164;
             // 
-            // ch_shoppe_name
-            // 
-            this.ch_shoppe_name.DisplayIndex = 2;
-            this.ch_shoppe_name.Text = "专柜商品名";
-            this.ch_shoppe_name.Width = 135;
-            // 
-            // ch_barcode
-            // 
-            this.ch_barcode.DisplayIndex = 1;
-            this.ch_barcode.Text = "条码";
-            this.ch_barcode.Width = 148;
-            // 
             // ch_item_no
             // 
             this.ch_item_no.Text = "货号";
             this.ch_item_no.Width = 118;
+            // 
+            // ch_spec
+            // 
+            this.ch_spec.Text = "规格";
+            this.ch_spec.Width = 89;
+            // 
+            // ch_companyName
+            // 
+            this.ch_companyName.Text = "厂商名称";
+            this.ch_companyName.Width = 124;
+            // 
+            // ch_supNo
+            // 
+            this.ch_supNo.Text = "厂编";
+            this.ch_supNo.Width = 115;
             // 
             // ch_issue_qty
             // 
@@ -118,12 +124,13 @@
 
         private System.Windows.Forms.ListView listView1;
         private System.Windows.Forms.ColumnHeader ch_item_name;
-        private System.Windows.Forms.ColumnHeader ch_shoppe_name;
-        private System.Windows.Forms.ColumnHeader ch_barcode;
         private System.Windows.Forms.ColumnHeader ch_item_no;
         private System.Windows.Forms.ColumnHeader ch_issue_qty;
         private System.Windows.Forms.ColumnHeader ch_realTimeStock;
         private System.Windows.Forms.ColumnHeader work_date;
         private System.Windows.Forms.ColumnHeader ch_imageName;
-    }
-}
+        private System.Windows.Forms.ColumnHeader ch_spec;
+        private System.Windows.Forms.ColumnHeader ch_companyName;
+        private System.Windows.Forms.ColumnHeader ch_supNo;
+    }                                             
+}                                                  

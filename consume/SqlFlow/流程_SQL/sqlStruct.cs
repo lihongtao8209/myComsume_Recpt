@@ -132,21 +132,22 @@ namespace SQL_FLOW
         public sql_struct_query_issue_record()
         {
             sql = @"select f.*,e.fileName from
-	            (select  c.name,
-				 c.shpe_name,
-				 b.BAR_CODE,
-                 b.item_no,
-				 c.qty,
-				 d.rt_stock,
-				 c.work_date
-				 from   consume_items a,consume_barcode b,consume_records c,consume_stock d
+	            (select  a.name,
+                 a.item_no,
+                 a.spec,
+                 a.company_name,
+                 a.sup_no,
+				 b.qty,
+				 c.rt_stock,
+				 b.work_date
+				 from   v_consume_items_supplier a,consume_records b,consume_stock c
 				 where  a.item_no=b.item_no
 						and a.item_no=c.item_no
-						and a.item_no=d.item_no
-				 order by c.record_no desc) as f
-                 left join consume_records_image e on f.WORK_DATE=e.WORK_DATE";
-            name = new string[] { "null" };
-            outName = new string[] { "品名", "专柜商品名称", "条码", "货号", "发货量", "库存", "更新时间", "图像文件名" };
+                        and a.item_no={0}
+				 order by b.record_no desc) as f
+                 left join consume_records_image e on f.WORK_DATE=e.WORK_DATE ";
+            name = new string[] { "货号" };
+            outName = new string[] { "品名", "货号", "规格", "厂商名称", "厂编", "发货量", "库存", "更新时间", "图片名称" };
         }
     }
 
@@ -155,20 +156,22 @@ namespace SQL_FLOW
         public sql_struct_query_recpt_record()
         {
             sql = @"select f.*,e.fileName from
-	            (select  c.name,
-				 b.BAR_CODE,
-                 b.item_no,
-				 c.recpt,
-				 d.rt_stock,
-				 c.work_date
-				 from   consume_items a,consume_barcode b,consume_recpt_records c,consume_stock d
+	            (select  a.name,
+                 a.item_no,
+                 a.spec,
+                 a.company_name,
+                 a.sup_no,
+				 b.recpt,
+				 c.rt_stock,
+				 b.work_date
+				 from   v_consume_items_supplier a,consume_recpt_records b,consume_stock c
 				 where  a.item_no=b.item_no
 						and a.item_no=c.item_no
-						and a.item_no=d.item_no
-				 order by c.record_no desc) as f
-                 left join consume_recpt_records_image e on f.WORK_DATE=e.WORK_DATE";
-            name = new string[] { "null" };
-            outName = new string[] { "品名", "条码", "货号", "收货量", "库存", "更新时间", "图像文件名" };
+                        and a.item_no={0}
+				 order by b.record_no desc) as f
+                 left join consume_recpt_records_image e on f.WORK_DATE=e.WORK_DATE ";
+            name = new string[] { "货号" };
+            outName = new string[] { "品名", "货号", "规格", "厂商名称", "厂编", "收货量", "库存", "更新时间", "图片名称" };
         }
     }
 
@@ -181,9 +184,9 @@ namespace SQL_FLOW
             outName = new string[] { "货号", "品名", "规格", "厂名", "厂编" };
         }
     }
-    class issue_list_query_issue_record : Sql_struct0
+    class issue_list_query_record : Sql_struct0
     {
-        public issue_list_query_issue_record()
+        public issue_list_query_record()
         {
             sql = @"select b.*,
                            aa.QTY,
@@ -200,8 +203,31 @@ namespace SQL_FLOW
                     where aa.item_no =b.item_no
                        and aa.item_no=c.item_no
                        and aa.item_no={0}";
-            name = new string[] { "null" };
+            name = new string[] { "货号" };
             outName = new string[] { "货号", "品名", "规格", "厂名", "厂编","当前发货量","当前库存","更新时间" };
+        }
+    }
+    class recpt_list_query_record : Sql_struct0
+    {
+        public recpt_list_query_record()
+        {
+            sql = @"select b.*,
+	                  aa.RECPT,
+                    c.RT_STOCK,
+                   aa.WORK_DATE
+                  from
+	  (select a.RECPT,
+			  a.work_date,
+			  a.item_no 
+	   from  consume_recpt_records a  
+	   order by a.record_no desc LIMIT 0,1) aa,
+					v_consume_items_supplier b,
+					           consume_stock c
+                        where aa.item_no =b.item_no
+                       and aa.item_no=c.item_no
+                       and aa.item_no={0}";
+            name = new string[] { "货号" };
+            outName = new string[] { "货号", "品名", "规格", "厂名", "厂编", "当前收货量", "当前库存", "更新时间" };
         }
     }
 }

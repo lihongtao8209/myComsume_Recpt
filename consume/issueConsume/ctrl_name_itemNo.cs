@@ -7,13 +7,14 @@ using System.Text;
 using System.Windows.Forms;
 using Tool;
 using Tools;
-namespace issueConsume
+namespace issue_recpt_Consume
 {
 
     public partial class ctrl_name_itemNo : UserControl
     {
-        public delegate void Del_ctrl_name_itemNo_KeyDown(object sender, KeyEventArgs e);
-        public event Del_ctrl_name_itemNo_KeyDown Event_ctrl_name_itemNo_KeyDown;
+        public delegate void Del_ctrl_name_itemNo(object sender, object e);
+        public event Del_ctrl_name_itemNo Event_ctrl_name_itemNo_KeyDown;
+        public event Del_ctrl_name_itemNo Event_ctrl_name_itemNo_List_Selected;
         Tools.DoCheck doCheck = new Tools.DoCheck();
         bool notCheck = false;
         //判断输入的是货号,还是品名
@@ -41,6 +42,34 @@ namespace issueConsume
             set;
         }
 
+        public void Enable_TextBox()
+        {
+            t_name_itemNo.Enabled = true;
+            t_name_itemNo.Focus();
+            t_name_itemNo.SelectAll();
+        }
+        public void Enable_ListBox()
+        {
+            lb_result.SelectedItem = lb_result.Items[0];
+            lb_result.Focus();
+        }
+
+        public void Empty_ListBox()
+        {
+            t_name_itemNo.Text = "";
+        }
+
+        protected void Expand(bool isExpand = true)
+        {
+            if (isExpand==true)
+            {
+                this.Height = this.t_name_itemNo.Height + this.lb_result.Height;
+            }
+            else
+            {
+                this.Height = this.t_name_itemNo.Height;
+            }
+        }
         private void t_name_itemNo_TextChanged(object sender, EventArgs e)
         {
             if (consume_items_supplier_result == null)
@@ -105,10 +134,7 @@ namespace issueConsume
 
         }
 
-        private void ctrl_name_itemNo_Load(object sender, EventArgs e)
-        {
 
-        }
 
         private void lb_result_MouseClick(object sender, MouseEventArgs e)
         {
@@ -117,8 +143,13 @@ namespace issueConsume
             if (lb_result.SelectedIndex != -1)
             {
                 t_name_itemNo.Text = lb_result.SelectedItem.ToString();
+                t_name_itemNo.SelectionStart = t_name_itemNo.TextLength;
                 this.Height = this.t_name_itemNo.Height;
                 notCheck = true;
+                if (Event_ctrl_name_itemNo_List_Selected != null)
+                {
+                    Event_ctrl_name_itemNo_List_Selected(sender, e);
+                }
             }
         }
 
@@ -127,15 +158,49 @@ namespace issueConsume
             if (e.KeyCode == Keys.Enter)
             {
                 doCheck.toCheck(Tools.CheckKey.IsNullCheckStr, Tools.CheckStr_Vlaue.inputData, t_name_itemNo.Text);
-                Event_ctrl_name_itemNo_KeyDown(sender, e);
                 notCheck = false;
+                if (Event_ctrl_name_itemNo_KeyDown!=null)
+                {
+                    Event_ctrl_name_itemNo_KeyDown(sender, e);
+                }
             }
 
             if (e.KeyCode == Keys.Back)
             {
                 notCheck = false;
             }
+
+            if (e.KeyCode == Keys.Down)
+            {
+                if (lb_result.Items[0]!=null)
+                {
+                    Enable_ListBox();
+                }
+            }
         }
+
+        private void lb_result_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                t_name_itemNo.Text = lb_result.SelectedItem.ToString();
+                t_name_itemNo.Focus();
+                Expand(false);
+                if (Event_ctrl_name_itemNo_List_Selected != null)
+                {
+                    Event_ctrl_name_itemNo_List_Selected(sender, e);
+                }
+            }
+        }
+
+        private void ctrl_name_itemNo_Leave(object sender, EventArgs e)
+        {
+            MessageBox.Show("1");
+        }
+
+
+
+
 
     }
 }

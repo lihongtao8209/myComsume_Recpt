@@ -15,7 +15,7 @@ namespace consume
 {
     public partial class Form1 : Form
     {
-        private recptConsume.recpt recpt1;
+        private recptConsume.recpt_name_itemNo recpt_name_itemNo1;
         private recpt_list recpt_list1;
         //关闭事件
         private delegate void control_close();
@@ -32,7 +32,7 @@ namespace consume
             initMainPanelQueryComponent();
             showRecptComponent();
             issue_name_itemNo1.Event_ItemNo += new issue_name_itemNo.Del_ItemNo(issue1_Event_ItemNo);
-            recpt1.Event_recpt_ItemNo += new recpt.Del_recpt_ItemNo(recpt_Event_ItemNo);
+            recpt_name_itemNo1.Event_recpt_ItemNo += new recpt_name_itemNo.Del_recpt_ItemNo(recpt_Event_ItemNo);
             event_control_close += new control_close(camerDriver1.camerDriver_Closed);
             event_control_show += new control_show(camerDriver1.camerDriver_Open);
             MySqlSimpleOper.SetServerIp("127.0.0.1");
@@ -43,15 +43,15 @@ namespace consume
         void initRecptComponent()
         {
             //添加耗材录入
-            recpt1 = new recptConsume.recpt();
+            recpt_name_itemNo1 = new recptConsume.recpt_name_itemNo();
             recpt_list1 = new recpt_list();
             // recpt1
             // 
-            this.recpt1.Location = this.issue_name_itemNo1.Location;
-            this.recpt1.Name = "recpt";
-            this.recpt1.Size = this.issue_name_itemNo1.Size;
-            this.recpt1.TabIndex = 1;
-            this.Controls.Add(recpt1);
+            this.recpt_name_itemNo1.Location = this.issue_name_itemNo1.Location;
+            this.recpt_name_itemNo1.Name = "recpt";
+            this.recpt_name_itemNo1.Size = this.issue_name_itemNo1.Size;
+            this.recpt_name_itemNo1.TabIndex = 1;
+            this.Controls.Add(recpt_name_itemNo1);
             // list1
             // 
             this.recpt_list1.Location = this.list1.Location;
@@ -81,12 +81,13 @@ namespace consume
         {
             if (show == false)
             {
-                recpt1.Hide();
+                recpt_name_itemNo1.Hide();
                 recpt_list1.Hide();
             }
             else
             {
-                recpt1.Show();
+                recpt_name_itemNo1.Show();
+                recpt_name_itemNo1.Focus();
                 recpt_list1.Show();
             }
         }
@@ -122,6 +123,7 @@ namespace consume
             else
             {
                 issue_name_itemNo1.Show();
+                issue_name_itemNo1.Focus();
                 list1.Show();
             }
         }
@@ -148,8 +150,8 @@ namespace consume
 
         void recpt_Event_ItemNo()
         {//加入list 照相    
-            camerDriver1.Do(recpt1.Item_no, true);
-            recpt_list1.Add(recpt1.Item_no);
+            camerDriver1.Do(recpt_name_itemNo1.Item_no, true);
+            recpt_list1.Add(recpt_name_itemNo1.Item_no);
         }
 
         private void 耗材录入ToolStripMenuItem_Click(object sender, EventArgs e)
@@ -206,6 +208,8 @@ namespace consume
             List<string[]> result=new List<string[]>();
             issueHelper.Query0(ref result);
             issue_name_itemNo1.SetResult(ref result);
+            recpt_name_itemNo1.SetResult(ref result);
+            mainPanel_Query1.SetResult(ref result);
         }
     }
 }

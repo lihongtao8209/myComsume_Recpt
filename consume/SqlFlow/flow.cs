@@ -54,9 +54,11 @@ namespace SqlFlow
         {
             string work_date = "";
             string name = "";
+            string[] format_work_date = new string[2];
             issueHelp.Camera_Recpt_Query0(item_no, ref work_date, ref  name);
-            FileName = FormatFileName("recpt_" + work_date, name, "null");
-            issueHelp.Camera_insert(item_no, FileName, work_date, true);
+            format_work_date = DeleteDateTimeChineseIdeograph(work_date);
+            FileName = FormatFileName("recpt_" + format_work_date[0], name, "null");
+            issueHelp.Camera_insert(item_no, FileName, format_work_date[1], true);
         }
         private string FormatFileName(string work_date, string name, string shpeName)
         {
@@ -75,9 +77,10 @@ namespace SqlFlow
             string format_work_date2 = "";
             string[] work_date_part;
             work_date_part = work_date.Split(' ');
-            if (work_date_part[3] != null)
+            string[] hourMinuteSecond;
+            string[] YearMonthDay =new string[3];
+            if (work_date_part.Length==4 && work_date_part[3] != null)
             {
-                string[] hourMinuteSecond;
                 hourMinuteSecond = work_date_part[3].Split(':');
                 for (int i = 0; i < hourMinuteSecond.Length; i++)
                 {
@@ -90,7 +93,6 @@ namespace SqlFlow
                         hourMinuteSecond[i] = "0" + hourMinuteSecond[i];
                     }
                 }
-                string[] YearMonthDay;
                 YearMonthDay=work_date_part[0].Split('/');
                 for (int i = 0; i < YearMonthDay.Length; i++)
                 {
@@ -102,6 +104,24 @@ namespace SqlFlow
                 format_work_date1 = YearMonthDay[0] + YearMonthDay[1] + YearMonthDay[2] + hourMinuteSecond[0] + hourMinuteSecond[1] + hourMinuteSecond[2];
                 format_work_date2 = string.Format("{0}/{1}/{2} {3}:{4}:{5}", YearMonthDay[0], YearMonthDay[1], YearMonthDay[2], hourMinuteSecond[0], hourMinuteSecond[1], hourMinuteSecond[2]);
                 format_work_date[0] = format_work_date1;
+                format_work_date[1] = format_work_date2;
+            }
+            else
+            {
+                if (work_date_part.Length == 2 && work_date_part[0] != null && work_date_part[1]!=null)
+                {
+                    YearMonthDay = work_date_part[0].Split('/');
+                    for (int i = 0; i < YearMonthDay.Length; i++)
+                    {
+                        if (YearMonthDay[i].Length == 1)
+                        {
+                            YearMonthDay[i] = "0" + YearMonthDay[i];
+                        }
+                    }
+
+                 }
+                format_work_date2 = string.Format("{0}/{1}/{2} {3}", YearMonthDay[0], YearMonthDay[1], YearMonthDay[2], work_date_part[1]);
+                format_work_date[0] = format_work_date2;
                 format_work_date[1] = format_work_date2;
             }
             //

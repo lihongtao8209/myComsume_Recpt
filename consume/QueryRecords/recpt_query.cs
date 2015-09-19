@@ -22,11 +22,17 @@ namespace Query_records
         //条件查询
         public delegate void Del_Query_Recpt_Records_Filter(List<string> arg);
         public event Del_Query_Recpt_Records_Filter Event_Query_Recpt_Records_Filter;
-        //事件的参数 1.时间 2.条码 3.货号 4.品名 5.专柜名称
+        //事件的参数 1.时间 2.货号
         List<string> arg = new List<string>();
+        //
+        ControlTool controlTool = new ControlTool();
+        //
+        string m_item_no;
+
         public recpt()
         {
             InitializeComponent();
+            ctrl_name_itemNo1.Event_ctrl_name_itemNo_List_Selected += new ctrl_name_itemNo.Del_ctrl_name_itemNo(ctrl_name_itemNo_List_Selected);
             EnableFilter();
         }
 
@@ -35,28 +41,14 @@ namespace Query_records
         private void CollectFilterFormula()
         {
             string dateTime = daytime_query1.GetDate();
-            /*
-            if (t_barcode.Text == "" && t_name.Text == "" && t_shoppeName.Text == "" && dateTime == "")
-            {
-                throw new IAmIssueQueryException("未设置查询条件");
-            }*/
-            arg.Clear();
-            //1.时间 2.条码 3.货号 4.品名 5.专柜名称
-            arg.Add(dateTime);
-            arg.Add(t_barcode.Text);
-            arg.Add(t_item_no.Text);
-            arg.Add(t_name.Text);
-            arg.Add("");
-
-            List<string> r = arg.FindAll(delegate(string s)
-              {
-                  return s.Trim() == "";
-              });
-
-            if (r.Count == arg.Count)
+            if (ctrl_name_itemNo1.inPutData == "" && dateTime == "")
             {
                 throw new IAmIssueQueryException("未设置查询条件");
             }
+            arg.Clear();
+            //1.时间  2.货号 
+            arg.Add(dateTime);
+            arg.Add(m_item_no);
         }
         private void EnableFilter(bool show = false)
         {
@@ -90,6 +82,86 @@ namespace Query_records
             {
                 MessageBox.Show(ex.Message);
             }
+        }
+
+        private void ctrl_name_itemNo_List_Selected(object sender, object e)
+        {
+            try
+            {
+                //查询
+                Query0();
+                controlTool.Focus(btn_doQuery);
+
+            }
+            catch (IAmCheckException ex)
+            {
+                MessageBox.Show(ex.Message);
+                //清空
+                ctrl_name_itemNo1.Empty_ListBox();
+            }
+            catch (Tools.IAmMySqlException ex)
+            {
+                MessageBox.Show(ex.Message);
+                //清空
+                ctrl_name_itemNo1.Empty_ListBox();
+            }
+            finally
+            {
+
+            }
+        }
+
+        private void Query0()
+        {
+            List<string[]> r = null;
+            if (ctrl_name_itemNo1.inPutType == Tools.macro.isInputItemNo)
+            {
+                r = ctrl_name_itemNo1.consume_items_supplier_result.FindAll(s =>
+                {
+                    if (s[0] == ctrl_name_itemNo1.inPutData)
+                    {
+                        return true;
+                    }
+                    return false;
+                }
+
+               );
+                if (r.Count != 1)
+                {
+                    throw new Tools.IAmMySqlException("得到的数据不正确" + r.Count.ToString());
+                }
+            }
+            if (ctrl_name_itemNo1.inPutType == Tools.macro.isInputItemName)
+            {
+                r = ctrl_name_itemNo1.consume_items_supplier_result.FindAll(s =>
+                {
+                    if (s[1] == ctrl_name_itemNo1.inPutData)
+                    {
+                        return true;
+                    }
+                    return false;
+                }
+
+               );
+                if (r.Count != 1)
+                {
+                    throw new Tools.IAmMySqlException("得到的数据不正确" + r.Count.ToString());
+                }
+            }
+            m_item_no = r[0][0];
+        }
+
+        public string Item_no
+        {
+            get
+            {
+                return m_item_no;
+            }
+        }
+
+        public void SetResult(ref List<string[]> result)
+        {
+            ctrl_name_itemNo1.consume_items_supplier_result = result;
         }
 
 

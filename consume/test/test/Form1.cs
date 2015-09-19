@@ -68,11 +68,30 @@ namespace test
 
         private void button2_Click(object sender, EventArgs e)
         {
-            List<string[]> result = new List<string[]>();
-            string sql = "select * from consume_items_supplier";
-            MySqlSimpleOper mysql = new MySqlSimpleOper("127.0.0.1", "consume_db", "root", "123456", sql);
-            mysql.MySqlRead(ref result);
+            try
+            {
+    
 
+            List<string[]> result = new List<string[]>();
+           // string sql = "select * from consume_items_supplier";
+         //   mysql.MySqlRead(ref result);
+
+           string sql = @"create table consume_records_image(
+		RECORD_NO BIGINT AUTO_INCREMENT PRIMARY KEY NOT NULL, 
+		ITEM_NO      INTEGER(7)  NOT NULL COMMENT '货号', 	
+		fileName     VARCHAR(1024) NOT NULL COMMENT '图像文件名',
+		WORK_DATE    timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP         COMMENT '发货时间')ENGINE=InnoDB								
+		CHARACTER SET 'utf8' COLLATE 'utf8_general_ci'
+		COMMENT='发货图片记录'";
+
+         sql=@"CREATE DATABASE `consume_db_temp`
+    CHARACTER SET 'utf8'
+    COLLATE 'utf8_general_ci'";
+            MySqlSimpleOper mysql = new MySqlSimpleOper("127.0.0.1", "consume_db", "root", "123456", sql);
+
+            string[] array=new string[1];
+            array[0] = sql;
+            mysql.MySqlExecuteNoQuery(array);
             /*
             //sql = "update consume_records set qty=4";
             //mysql.SqlString = sql;
@@ -89,6 +108,15 @@ namespace test
             sql = @"delete from consume_records where qty=2";
             mysql.MySqlDelete(sql);
              * */
+            }
+            catch (System.Exception ex)
+            {
+                if (ex.Message.IndexOf("exists", 0) != -1)
+                {
+                    MessageBox.Show("表已存在");
+
+                }
+            }
         }
 
         private void button3_Click(object sender, EventArgs e)

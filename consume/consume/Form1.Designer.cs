@@ -35,9 +35,9 @@
             this.记录查询ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.发放查询ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.录入查询ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.issue_name_itemNo1 = new issueConsume.issue_name_itemNo();
             this.camerDriver1 = new cameraDriver.camerDriver();
             this.list1 = new detailList.list();
-            this.issue_name_itemNo1 = new issueConsume.issue_name_itemNo();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -99,6 +99,14 @@
             this.录入查询ToolStripMenuItem.Text = "录入查询";
             this.录入查询ToolStripMenuItem.Click += new System.EventHandler(this.录入查询ToolStripMenuItem_Click);
             // 
+            // issue_name_itemNo1
+            // 
+            this.issue_name_itemNo1.Location = new System.Drawing.Point(17, 28);
+            this.issue_name_itemNo1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.issue_name_itemNo1.Name = "issue_name_itemNo1";
+            this.issue_name_itemNo1.Size = new System.Drawing.Size(606, 288);
+            this.issue_name_itemNo1.TabIndex = 0;
+            // 
             // camerDriver1
             // 
             this.camerDriver1.BackColor = System.Drawing.Color.White;
@@ -117,13 +125,6 @@
             this.list1.Name = "list1";
             this.list1.Size = new System.Drawing.Size(1109, 445);
             this.list1.TabIndex = 2;
-            // 
-            // issue_name_itemNo1
-            // 
-            this.issue_name_itemNo1.Location = new System.Drawing.Point(17, 28);
-            this.issue_name_itemNo1.Name = "issue_name_itemNo1";
-            this.issue_name_itemNo1.Size = new System.Drawing.Size(606, 288);
-            this.issue_name_itemNo1.TabIndex = 5;
             // 
             // Form1
             // 

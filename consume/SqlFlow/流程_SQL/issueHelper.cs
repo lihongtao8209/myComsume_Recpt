@@ -20,9 +20,9 @@ namespace SQL_FLOW
         {
             //transAction = new TransAction[] { new TransAction0(), new TransAction1(), new TransAction2(),new TransAction3(),new TransAction4(),new TransAction5()};
             transAction = new TransAction[] { new T_issue_name_query_issue_record(), new TransAction1(), new TransAction2(), new TransAction3(), new TransAction4(), new TransAction5() };
-            listViewTransAction = new TransAction[]{new T_issue_list_query_issue_record()};
-            cameraTransAction = new TransAction[] { new TransAction_camera0(), new TransAction_camera_recpt0(), new TransAction_camera_ins()};
-            queryTransAction = new TransAction[] { new TransAction_Query_issue_record(),new TransAction_Query_recpt_record()};
+            listViewTransAction = new TransAction[] { new T_issue_list_query_record(), new T_recpt_list_query_record() };
+            cameraTransAction = new TransAction[] { new TransAction_camera0(), new TransAction_camera_recpt0(), new TransAction_camera_ins() };
+            queryTransAction = new TransAction[] { new TransAction_Query_issue_record(), new TransAction_Query_recpt_record() };
         }
 
         /// <summary>
@@ -48,8 +48,8 @@ namespace SQL_FLOW
             item_type = parametersOut[0][1];
             item_name = parametersOut[0][2];
         }*/
-        
-        public void Query00(string t_name,ref string item_no,ref string name,ref string spec,ref string sup_no,ref string companyName,ref string issueQty,ref string realTimeStock,ref string work_date)
+
+        public void Query00(string t_name, ref string item_no, ref string name, ref string spec, ref string sup_no, ref string companyName, ref string issueQty, ref string realTimeStock, ref string work_date)
         {//"货号","规格","品名","厂名", "厂编"
             Clear();
             parameter_in = new string[] { t_name };
@@ -69,7 +69,7 @@ namespace SQL_FLOW
         }
 
         public void Query0(ref List<string[]> parametersOut)
-        { 
+        {
             Clear();
             parameter_in = new string[] { "null" };
             parametersIn.Add(parameter_in);
@@ -90,6 +90,17 @@ namespace SQL_FLOW
             listViewTransAction[0].OutPut(ref parametersOut);
         }
 
+        public void Recpt_ListView_Query(string item_no, ref List<string[]> parametersOut)
+        {
+            Clear();
+            parameter_in = new string[] { item_no };
+            parametersIn.Add(parameter_in);
+            //加入入参列表中
+            listViewTransAction[1].Input(parametersIn);
+            //得到出参列表
+            listViewTransAction[1].OutPut(ref parametersOut);
+        }
+
         public void Query1(string item_no, ref string realtimeStock)
         {
             //查询 实时库存
@@ -103,9 +114,9 @@ namespace SQL_FLOW
             //parametersOut.Add(parameter_out);
             transAction[1].Input(parametersIn);
             transAction[1].OutPut(ref parametersOut);
-            realtimeStock=parametersOut[0][0];
+            realtimeStock = parametersOut[0][0];
         }
-        public int insert_update(string item_no, string item_name, string item_type, string shoppeName, string realtimeStock,string issueQty)
+        public int insert_update(string item_no, string item_name, string item_type, string shoppeName, string realtimeStock, string issueQty)
         {
             //判断只能为数字
             //插入 货号,品名,发货数量,专柜名称,插入时间
@@ -153,7 +164,7 @@ namespace SQL_FLOW
         //出参 货号
         //表   consume_barcode
         public void Recpt_Query0(string t_barcode, ref string item_no)
-        {   
+        {
             Clear();
             parameter_in = new string[] { t_barcode };
             parametersIn.Add(parameter_in);
@@ -189,7 +200,7 @@ namespace SQL_FLOW
             parametersOut.Add(parameter_out);
 
             //表consume_stock 更新
-            parameter_in = new string[] { item_no,item_name,recpt_qty, "now()" };
+            parameter_in = new string[] { item_no, item_name, recpt_qty, "now()" };
             parameter_out = new string[] { "update" };
             parametersIn.Add(parameter_in);
             parametersOut.Add(parameter_out);
@@ -210,7 +221,7 @@ namespace SQL_FLOW
             return macro.succeed;
         }
 
-        public void Camera_Query0(string item_no, ref string work_date,ref string name,ref string shpe_name)
+        public void Camera_Query0(string item_no, ref string work_date, ref string name, ref string shpe_name)
         {   //查询 工作时间 品名 专柜商品
             //入参 货号
             //出参  工作时间 品名 专柜商品
@@ -246,7 +257,7 @@ namespace SQL_FLOW
         }
 
 
-        public int Camera_insert(string item_no, string file_name, string work_date ,bool recpt=false)
+        public int Camera_insert(string item_no, string file_name, string work_date, bool recpt = false)
         {   //插入 货号 文件名 工作时间
             //入参 货号 文件名 工作时间
             //出参 
@@ -254,7 +265,7 @@ namespace SQL_FLOW
             Clear();
             if (recpt == false)
             {
-                parameter_in = new string[] { "consume_records_image",item_no, file_name, work_date };
+                parameter_in = new string[] { "consume_records_image", item_no, file_name, work_date };
             }
             else
             {
@@ -271,14 +282,14 @@ namespace SQL_FLOW
             {
                 //如果没有更新成功
                 return macro.failed;
-            }       
+            }
             return macro.succeed;
         }
 
-        public void Query_issue_record(ref  List<string[]> result)
+        public void Query_issue_record(ref  List<string[]> result, string[] parameter_in)
         {
-             Clear();
-            parameter_in = new string[] { "null" };
+            Clear();
+            this.parameter_in = parameter_in;
             parametersIn.Add(parameter_in);
             //加入入参列表中
             queryTransAction[0].Input(parametersIn);
@@ -287,10 +298,10 @@ namespace SQL_FLOW
             result = parametersOut;
         }
 
-        public void Query_recpt_record(ref  List<string[]> result)
+        public void Query_recpt_record(ref  List<string[]> result, string[] parameter_in)
         {
             Clear();
-            parameter_in = new string[] { "null" };
+            this.parameter_in = parameter_in;
             parametersIn.Add(parameter_in);
             //加入入参列表中
             queryTransAction[1].Input(parametersIn);
@@ -299,8 +310,8 @@ namespace SQL_FLOW
             result = parametersOut;
         }
 
-    
-        
+
+
         private void Clear()
         {
             parametersIn.Clear();

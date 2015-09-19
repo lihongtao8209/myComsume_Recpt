@@ -11,7 +11,7 @@ namespace detailList
 {
     public partial class recpt_list : UserControl
     {
-        IssueHelper issueHelper = new IssueHelper();
+        SQL_FLOW.IssueHelper issueHelper = new SQL_FLOW.IssueHelper();
         public recpt_list()
         {
             InitializeComponent();
@@ -20,13 +20,13 @@ namespace detailList
         {
             try
             {
-                string item_name = "";
-                string barcode = "";
-                string realTimeStock = "";
-                string recptQty = "";
-                string work_date = "";
-                issueHelper.Recpt_Query0(item_no, ref item_name, ref barcode, ref recptQty, ref realTimeStock, ref work_date);
-                ListViewItem item = new ListViewItem(new string[] { item_name, barcode, item_no.ToString(), recptQty, realTimeStock, work_date });
+                List<string[]> result = new List<string[]>();
+                issueHelper.Recpt_ListView_Query(item_no, ref result);
+                if (result == null || result.Count == 0 || result[0] == null)
+                {
+                    MessageBox.Show(item_no + "没有查到数据,无法添加！");
+                }
+                ListViewItem item = new ListViewItem(result[0]);
                 listView1.Items.Add(item);
                 item.EnsureVisible();
             }
@@ -34,6 +34,7 @@ namespace detailList
             {
                 MessageBox.Show(ex.Message);
             }
+
         }
         private void AddToList()
         {

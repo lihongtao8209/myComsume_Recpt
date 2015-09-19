@@ -300,12 +300,12 @@ namespace SQL_FLOW
     // 发货查询 consume_items,consume_barcode ,consume_records,consume_stock,consume_records_image
     class TransAction_Query_issue_record : TransAction_camera0
     {
+        /*
         public override string SetSql(string sql, string[] args)
         {
-            //this.sql = string.Format(sql, args);
             this.sql = sql;
             return this.sql;
-        }
+        }*/
 
         public override void Input(List<string[]> parameters)
         {
@@ -337,11 +337,22 @@ namespace SQL_FLOW
     //发货查询记录
     //输入品名
     //输出 "货号","品名","规格","厂编","厂名","发货数量","库存","更新时间"
-    class T_issue_list_query_issue_record : TransAction_Read
+    class T_issue_list_query_record : TransAction_Read
     {
         public override void init()
         {
-            m_sql_struct = new issue_list_query_issue_record();
+            m_sql_struct = new issue_list_query_record();
         }
     }
+    //发货查询记录
+    //输入品名
+    //输出 "货号","品名","规格","厂编","厂名","录入数量","库存","更新时间"
+    class T_recpt_list_query_record : TransAction_Read
+    {
+        public override void init()
+        {
+            m_sql_struct = new recpt_list_query_record();
+        }
+    }
+
 }

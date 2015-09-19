@@ -13,6 +13,10 @@ namespace SqlFlow
         {
 
         }
+        public virtual void Do(ref List<string[]> result, ref string[] parameter_in)
+        {
+
+        }
         public string FormatWorkDateString(string work_date)
         {//2015/9/2 11:27:39
             work_date = work_date.Replace(" ", "");
@@ -36,9 +40,9 @@ namespace SqlFlow
             base.issueHelp = issueHelp;
         }
 
-        public override void Do(ref  List<string[]> result)
+        public override void Do(ref List<string[]> result, ref string[] parameter_in)
         {
-            issueHelp.Query_issue_record(ref result);
+            issueHelp.Query_issue_record(ref result,parameter_in);
         }
     }
 
@@ -48,9 +52,11 @@ namespace SqlFlow
         {
             base.issueHelp = issueHelp;
         }
-        public override void Do(ref  List<string[]> result)
+
+        public override void Do(ref List<string[]> result, ref string[] parameter_in)
         {
-            issueHelp.Query_recpt_record(ref result);
+            issueHelp.Query_recpt_record(ref result, parameter_in);
         }
+       
     }
 }

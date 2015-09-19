@@ -10,6 +10,7 @@ using Macro;
 using Check;
 using Tool;
 using System.Diagnostics;
+using issue_recpt_Consume;
 
 namespace issueConsume
 {
@@ -35,11 +36,10 @@ namespace issueConsume
         Tools.DoCheck doCheck = new Tools.DoCheck();
         //
         ControlTool controlTool = new ControlTool();
-        //
         public issue_name_itemNo()
         {
             InitializeComponent();
-            ctrl_name_itemNo1.Event_ctrl_name_itemNo_KeyDown += new ctrl_name_itemNo.Del_ctrl_name_itemNo_KeyDown(ctrl_name_itemNo_KeyDown);
+            ctrl_name_itemNo1.Event_ctrl_name_itemNo_KeyDown += new ctrl_name_itemNo.Del_ctrl_name_itemNo(ctrl_name_itemNo_KeyDown);
         }
 
         public string Item_no
@@ -56,7 +56,7 @@ namespace issueConsume
         }
 
         //按下回车键
-        public void ctrl_name_itemNo_KeyDown(object sender, KeyEventArgs e)
+        public void ctrl_name_itemNo_KeyDown(object sender, object e)
         {
             try
             {
@@ -69,13 +69,13 @@ namespace issueConsume
             {
                 MessageBox.Show(ex.Message);
                 //清空
-                controlTool.Empty(t_itemNo_name);
+                ctrl_name_itemNo1.Empty_ListBox();
             }
             catch (Tools.IAmMySqlException ex)
             {
                 MessageBox.Show(ex.Message);
                 //清空
-                controlTool.Empty(t_itemNo_name);
+                ctrl_name_itemNo1.Empty_ListBox();
             }
             finally
             {
@@ -108,10 +108,11 @@ namespace issueConsume
                    }
 
                );
-                if (r.Count != 1)
+                if (r.Count == 0)
                 {
-                    throw new Tools.IAmMySqlException("得到的数据不正确" + r.Count.ToString());
+                    throw new Tools.IAmMySqlException("得到的数据为空" + r.Count.ToString());
                 }
+                //如果有多条数据应该判断货号和品名是否相同,相同则取出一条,不相同就可以报错
                 l_name_itemNo.Text = "货号";
                 l_itemNo_name.Text = "品名";
                 t_itemNo_name.Text = r[0][1];
@@ -128,10 +129,11 @@ namespace issueConsume
                 }
 
                );
-                if (r.Count != 1)
+                if (r.Count == 0)
                 {
-                    throw new Tools.IAmMySqlException("得到的数据不正确" + r.Count.ToString());
+                    throw new Tools.IAmMySqlException("得到的数据为空" + r.Count.ToString());
                 }
+                //如果有多条数据应该判断货号和品名是否相同,相同则取出一条,不相同就可以报错
                 l_name_itemNo.Text = "品名";
                 l_itemNo_name.Text = "货号";
                 t_itemNo_name.Text = r[0][0];
@@ -216,7 +218,7 @@ namespace issueConsume
                     //发送事件
                     Event_ItemNo();
                     //转移焦点
-                    controlTool.Enable(t_itemNo_name);
+                    ctrl_name_itemNo1.Enable_TextBox();
                 }
                 catch (System.FormatException ex) { MessageBox.Show(ex.Message); }
                 catch (System.OverflowException ex) { MessageBox.Show(ex.Message); }
@@ -230,5 +232,10 @@ namespace issueConsume
 
             }
         }
+
+
+       
+
+        
     }
 }

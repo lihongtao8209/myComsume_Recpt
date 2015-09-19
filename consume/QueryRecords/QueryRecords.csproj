@@ -46,6 +46,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="controlTool.cs" />
     <Compile Include="Daytime_query.cs">
       <SubType>UserControl</SubType>
     </Compile>

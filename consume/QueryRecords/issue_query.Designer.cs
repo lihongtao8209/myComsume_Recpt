@@ -33,16 +33,12 @@
             this.tbc_Filter = new System.Windows.Forms.TabControl();
             this.tabPage_dateTime = new System.Windows.Forms.TabPage();
             this.daytime_query1 = new QueryRecords.Daytime_query();
-            this.tabPage_others = new System.Windows.Forms.TabPage();
-            this.t_shoppeName = new System.Windows.Forms.TextBox();
-            this.l_shoppeName = new System.Windows.Forms.Label();
-            this.t_name = new System.Windows.Forms.TextBox();
-            this.l_name = new System.Windows.Forms.Label();
-            this.t_barcode = new System.Windows.Forms.TextBox();
-            this.l_barcode = new System.Windows.Forms.Label();
+            this.tabPage_name_ItemNo = new System.Windows.Forms.TabPage();
+            this.ctrl_name_itemNo1 = new issue_recpt_Consume.ctrl_name_itemNo();
+            this.l_name_itemNo = new System.Windows.Forms.Label();
             this.tbc_Filter.SuspendLayout();
             this.tabPage_dateTime.SuspendLayout();
-            this.tabPage_others.SuspendLayout();
+            this.tabPage_name_ItemNo.SuspendLayout();
             this.SuspendLayout();
             // 
             // btn_doQuery
@@ -55,6 +51,7 @@
             this.btn_doQuery.Text = "查询";
             this.btn_doQuery.UseVisualStyleBackColor = true;
             this.btn_doQuery.Click += new System.EventHandler(this.btn_doQuery_Click);
+            this.btn_doQuery.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.btn_doQuery_KeyPress);
             // 
             // chk_Filter
             // 
@@ -70,7 +67,7 @@
             // tbc_Filter
             // 
             this.tbc_Filter.Controls.Add(this.tabPage_dateTime);
-            this.tbc_Filter.Controls.Add(this.tabPage_others);
+            this.tbc_Filter.Controls.Add(this.tabPage_name_ItemNo);
             this.tbc_Filter.Location = new System.Drawing.Point(3, 3);
             this.tbc_Filter.Name = "tbc_Filter";
             this.tbc_Filter.SelectedIndex = 0;
@@ -84,86 +81,48 @@
             this.tabPage_dateTime.Name = "tabPage_dateTime";
             this.tabPage_dateTime.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage_dateTime.Size = new System.Drawing.Size(592, 190);
-            this.tabPage_dateTime.TabIndex = 0;
+            this.tabPage_dateTime.TabIndex = 1;
             this.tabPage_dateTime.Text = "时间";
             this.tabPage_dateTime.UseVisualStyleBackColor = true;
             // 
             // daytime_query1
             // 
-            this.daytime_query1.Location = new System.Drawing.Point(6, 6);
+            this.daytime_query1.Location = new System.Drawing.Point(0, 0);
             this.daytime_query1.Name = "daytime_query1";
             this.daytime_query1.Size = new System.Drawing.Size(466, 75);
             this.daytime_query1.TabIndex = 0;
             // 
-            // tabPage_others
+            // tabPage_name_ItemNo
             // 
-            this.tabPage_others.Controls.Add(this.t_shoppeName);
-            this.tabPage_others.Controls.Add(this.l_shoppeName);
-            this.tabPage_others.Controls.Add(this.t_name);
-            this.tabPage_others.Controls.Add(this.l_name);
-            this.tabPage_others.Controls.Add(this.t_barcode);
-            this.tabPage_others.Controls.Add(this.l_barcode);
-            this.tabPage_others.Location = new System.Drawing.Point(4, 25);
-            this.tabPage_others.Name = "tabPage_others";
-            this.tabPage_others.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage_others.Size = new System.Drawing.Size(592, 190);
-            this.tabPage_others.TabIndex = 1;
-            this.tabPage_others.Text = "其它";
-            this.tabPage_others.UseVisualStyleBackColor = true;
+            this.tabPage_name_ItemNo.Controls.Add(this.ctrl_name_itemNo1);
+            this.tabPage_name_ItemNo.Controls.Add(this.l_name_itemNo);
+            this.tabPage_name_ItemNo.Location = new System.Drawing.Point(4, 25);
+            this.tabPage_name_ItemNo.Name = "tabPage_name_ItemNo";
+            this.tabPage_name_ItemNo.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage_name_ItemNo.Size = new System.Drawing.Size(592, 190);
+            this.tabPage_name_ItemNo.TabIndex = 0;
+            this.tabPage_name_ItemNo.Text = "耗材名或货号";
+            this.tabPage_name_ItemNo.UseVisualStyleBackColor = true;
             // 
-            // t_shoppeName
+            // ctrl_name_itemNo1
             // 
-            this.t_shoppeName.Font = new System.Drawing.Font("SimSun", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.t_shoppeName.Location = new System.Drawing.Point(18, 156);
-            this.t_shoppeName.Name = "t_shoppeName";
-            this.t_shoppeName.Size = new System.Drawing.Size(561, 30);
-            this.t_shoppeName.TabIndex = 17;
+            this.ctrl_name_itemNo1.consume_items_supplier_result = null;
+            this.ctrl_name_itemNo1.inPutType = 0;
+            this.ctrl_name_itemNo1.Location = new System.Drawing.Point(18, 28);
+            this.ctrl_name_itemNo1.Margin = new System.Windows.Forms.Padding(4);
+            this.ctrl_name_itemNo1.Name = "ctrl_name_itemNo1";
+            this.ctrl_name_itemNo1.Size = new System.Drawing.Size(567, 36);
+            this.ctrl_name_itemNo1.TabIndex = 18;
             // 
-            // l_shoppeName
+            // l_name_itemNo
             // 
-            this.l_shoppeName.AutoSize = true;
-            this.l_shoppeName.Font = new System.Drawing.Font("SimSun", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.l_shoppeName.Location = new System.Drawing.Point(13, 128);
-            this.l_shoppeName.Name = "l_shoppeName";
-            this.l_shoppeName.Size = new System.Drawing.Size(93, 20);
-            this.l_shoppeName.TabIndex = 16;
-            this.l_shoppeName.Text = "专柜名称";
-            // 
-            // t_name
-            // 
-            this.t_name.Font = new System.Drawing.Font("SimSun", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.t_name.Location = new System.Drawing.Point(18, 89);
-            this.t_name.Name = "t_name";
-            this.t_name.Size = new System.Drawing.Size(561, 30);
-            this.t_name.TabIndex = 15;
-            // 
-            // l_name
-            // 
-            this.l_name.AutoSize = true;
-            this.l_name.Font = new System.Drawing.Font("SimSun", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.l_name.Location = new System.Drawing.Point(13, 64);
-            this.l_name.Name = "l_name";
-            this.l_name.Size = new System.Drawing.Size(72, 20);
-            this.l_name.TabIndex = 14;
-            this.l_name.Text = "耗材名";
-            // 
-            // t_barcode
-            // 
-            this.t_barcode.Font = new System.Drawing.Font("SimSun", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.t_barcode.Location = new System.Drawing.Point(18, 28);
-            this.t_barcode.Name = "t_barcode";
-            this.t_barcode.Size = new System.Drawing.Size(561, 30);
-            this.t_barcode.TabIndex = 13;
-            // 
-            // l_barcode
-            // 
-            this.l_barcode.AutoSize = true;
-            this.l_barcode.Font = new System.Drawing.Font("SimSun", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.l_barcode.Location = new System.Drawing.Point(13, 5);
-            this.l_barcode.Name = "l_barcode";
-            this.l_barcode.Size = new System.Drawing.Size(293, 20);
-            this.l_barcode.TabIndex = 12;
-            this.l_barcode.Text = "请扫描耗材条码-耗材发放查询";
+            this.l_name_itemNo.AutoSize = true;
+            this.l_name_itemNo.Font = new System.Drawing.Font("SimSun", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.l_name_itemNo.Location = new System.Drawing.Point(13, 5);
+            this.l_name_itemNo.Name = "l_name_itemNo";
+            this.l_name_itemNo.Size = new System.Drawing.Size(135, 20);
+            this.l_name_itemNo.TabIndex = 12;
+            this.l_name_itemNo.Text = "耗材名或货号";
             // 
             // issue
             // 
@@ -176,8 +135,8 @@
             this.Size = new System.Drawing.Size(606, 288);
             this.tbc_Filter.ResumeLayout(false);
             this.tabPage_dateTime.ResumeLayout(false);
-            this.tabPage_others.ResumeLayout(false);
-            this.tabPage_others.PerformLayout();
+            this.tabPage_name_ItemNo.ResumeLayout(false);
+            this.tabPage_name_ItemNo.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -189,13 +148,9 @@
         private System.Windows.Forms.CheckBox chk_Filter;
         private System.Windows.Forms.TabControl tbc_Filter;
         private System.Windows.Forms.TabPage tabPage_dateTime;
-        private System.Windows.Forms.TabPage tabPage_others;
-        private System.Windows.Forms.TextBox t_shoppeName;
-        private System.Windows.Forms.Label l_shoppeName;
-        private System.Windows.Forms.TextBox t_name;
-        private System.Windows.Forms.Label l_name;
-        private System.Windows.Forms.TextBox t_barcode;
-        private System.Windows.Forms.Label l_barcode;
+        private System.Windows.Forms.TabPage tabPage_name_ItemNo;
+        private System.Windows.Forms.Label l_name_itemNo;
         private QueryRecords.Daytime_query daytime_query1;
+        private issue_recpt_Consume.ctrl_name_itemNo ctrl_name_itemNo1;
     }
 }

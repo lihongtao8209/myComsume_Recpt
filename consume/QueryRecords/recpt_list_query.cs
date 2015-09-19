@@ -69,33 +69,16 @@ namespace Query_records
             listView1.Items.Clear();
             try
             {
-                string item_no = "";
-                string item_name = "";
-                string barcode = "";
-                string recpt_qty = "";
-                string rt_stock = "";
-                string work_date = "";
-                string imageName = "";
                 ListViewItem item = null;
+                string[] inputParamters = new string[] { arg[1] };
                 List<string[]> result = new List<string[]>();
                 bf = flow.InitFlow(flow.flowFlag.Get_query_recpt_record());
-                bf.Do(ref result);
-                //
-                Filter(ref arg, ref result);
-                //
+                bf.Do(ref result, ref inputParamters);
                 for (int i = 0; i < result.Count; i++)
                 {
-                    item_name = result[i][0];
-                    barcode = result[i][1];
-                    item_no = result[i][2];
-                    recpt_qty = result[i][3];
-                    rt_stock = result[i][4];
-                    work_date = result[i][5];
-                    imageName = result[i][6];
-                    item = new ListViewItem(new string[] { item_name, barcode, item_no, recpt_qty, rt_stock, work_date, imageName });
+                    item = new ListViewItem(result[i]);
                     listView1.Items.Add(item);
                 }
-
             }
             catch (System.Exception ex)
             {
@@ -188,7 +171,7 @@ namespace Query_records
                 int thisRow = listView1.FocusedItem.Index;
                 if (e.Button == MouseButtons.Left && this.listView1.Items.Count > 0)
                 {//查找文件名
-                    string imageFileName = listView1.SelectedItems[0].SubItems[6].Text;
+                    string imageFileName = listView1.SelectedItems[0].SubItems[8].Text;
                     //文件名不能为空
                     doCheck.toCheck(Tools.CheckKey.EmptyCheck, Tools.EmptyCheck_Value.notSetEmpty, imageFileName);
                     //设置根目录,应该可以改变
